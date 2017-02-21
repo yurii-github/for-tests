@@ -1,5 +1,6 @@
 <?php
-return [
+
+$cfg = [
 	'basePath' => dirname(__DIR__), //application dir
 	'error_view' => dirname(__DIR__) . '/views/error.php', // $error is sent as Exception object TODO: check if not set etc...
 	'request' => [
@@ -8,9 +9,9 @@ return [
 		'defaultAction' => 'index'
 	],
 	'db' => [
-		'dsn' => 'mysql:host=localhost;dbname=yurii',
-		'username' => 'yurii',
-		'password' => 'fuckit'
+		'dsn' => 'mysql:host=localhost;dbname=DBNAME',
+		'username' => 'USERNAME',
+		'password' => 'PASSWORD'
 	],
 	'user' => 'app\models\User', // used for authentication, must implement framework\IUser
 	
@@ -28,3 +29,10 @@ return [
 		
 	]
 ];
+
+
+if (file_exists(__DIR__.'/config.local.php')) {
+  $cfg = (include __DIR__.'/config.local.php') + $cfg;
+}
+
+return $cfg;

@@ -165,7 +165,7 @@ final class Application // seal it. cannot be extended, ok for test
 			
 			$act = $app->request->parseUrl();
 			$app->controller = new $act['controller'];
-			$rendered_page = $app->controller->$act['action']();
+			$rendered_page = $app->controller->{$act['action']}();
 			
 			echo $rendered_page; //finished
 			

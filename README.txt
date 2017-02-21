@@ -4,14 +4,12 @@ php_mbstring.dll
 php_exif.dll 
 php_pdo_mysql.dll
 
-
+- - - - - - - - - - - - -
 Установка
+- - - - - - - - - - - - -
 
-выполнить против базы скрипт /schema.sql
-подредактировать конфигурацию в /app/config/config.php : db[]
-
-
-
+1. выполнить против базы скрипт /schema.sql
+2. создать локальный конфиг в  /app/config/config.local.php (по примеру config.php)
 
 
 

@@ -2,3 +2,4 @@
 /.project
 /.settings
 /app/data/*.log
+/app/config/config.local.php
