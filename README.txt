@@ -1,3 +1,7 @@
+(c) 2014
+
+TBD: change to match PHP7
+
 необходимы расширения
 
 php_mbstring.dll
