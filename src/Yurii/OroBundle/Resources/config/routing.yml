@@ -1,0 +1,3 @@
+oro_homepage:
+    path:     /
+    defaults: { _controller: OroBundle:Default:index }
