@@ -16,6 +16,16 @@
             "Tests\\": "tests/"
         }
     },
+     "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/schmittjoh/JMSTranslationBundle.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.2.*",
@@ -28,7 +38,9 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "twig/twig": "^1.0||^2.0"
+        "twig/twig": "^1.0||^2.0",
+        "jms/i18n-routing-bundle": "dev-master",
+        "jms/translation-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

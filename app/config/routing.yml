@@ -1,6 +1,6 @@
-oro:
-    resource: "@OroBundle/Resources/config/routing.yml"
-    prefix:   /
+#oro:
+#    resource: "@OroBundle/Resources/config/routing.yml"
+#    prefix:   /aaa
 
 app:
     resource: "@AppBundle/Controller/"

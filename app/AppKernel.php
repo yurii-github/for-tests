@@ -17,6 +17,12 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new Yurii\OroBundle\OroBundle(),
+          
+          // checking
+          new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+          // not required, but recommended for better extraction
+         // new JMS\TranslationBundle\JMSTranslationBundle(),
+          
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
