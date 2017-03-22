@@ -18,4 +18,13 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
+    
+    
+    /**
+     * @Route("/dummy", name="dummy_alias")
+     */
+    public function dummyAction(Request $request)
+    {
+      return $this->render('default/dummy.html.twig', ['percent' => 60]);
+    }
 }
