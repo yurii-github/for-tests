@@ -10,7 +10,7 @@ Contains independent bundle `Yurii\OroBundle` that
 - adds to our Router custom loader (as injected service) that adds additional routes to collection
 - sets translation domain to 'example' via decorator
 
-To run tests, execure in app root dir  
+To run tests, execute in app root dir  
 ```phpunit src/Yurii/OroBundle/Tests/```
 
 works on hosts
