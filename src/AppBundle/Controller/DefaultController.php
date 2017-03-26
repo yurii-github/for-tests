@@ -21,10 +21,9 @@ class DefaultController extends Controller
     
     
     /**
+     * dummy route
      * @Route("/dummy", name="dummy_alias")
      */
     public function dummyAction(Request $request)
-    {
-      return $this->render('default/dummy.html.twig', ['percent' => 60]);
-    }
+    {}
 }
