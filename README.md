@@ -17,3 +17,5 @@ works on hosts
 - example.com
 - example.com/fr
 - example.fr
+
+https://raw.githubusercontent.com/yurii-github/test8/master/page.png
