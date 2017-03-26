@@ -3,6 +3,7 @@ test 8
 
 A Symfony project created on March 22, 2017, 5:58 pm.
 
+time spent ~10-12h
 
 Contains independent bundle `Yurii\OroBundle` that
 
