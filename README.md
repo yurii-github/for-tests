@@ -18,4 +18,5 @@ works on hosts
 - example.com/fr
 - example.fr
 
-https://raw.githubusercontent.com/yurii-github/test8/master/page.png
+![Image](https://raw.githubusercontent.com/yurii-github/test8/master/page.png)
+
