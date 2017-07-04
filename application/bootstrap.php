@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 
 // -- Environment setup --------------------------------------------------------
 
@@ -33,6 +33,13 @@ date_default_timezone_set('America/Chicago');
 setlocale(LC_ALL, 'en_US.utf-8');
 
 /**
+ * Enable Composer auto-loader.
+ *
+ * @link https://getcomposer.org/doc/00-intro.md#autoloading
+ */
+require __DIR__.'/../vendor/autoload.php';
+
+/**
  * Enable the Kohana auto-loader.
  *
  * @link http://kohanaframework.org/guide/using.autoloading
@@ -56,19 +63,42 @@ spl_autoload_register(array('Kohana', 'auto_load'));
  */
 ini_set('unserialize_callback_func', 'spl_autoload_call');
 
-/**
- * Set the mb_substitute_character to "none"
- *
- * @link http://www.php.net/manual/function.mb-substitute-character.php
- */
-mb_substitute_character('none');
-
 // -- Configuration and initialization -----------------------------------------
+
+/**
+ * Enable modules. Modules are referenced by a relative or absolute path.
+ */
+Kohana::modules([
+	'application' => APPPATH,                         // Main application module
+	//'auth'        => $vendor_path.'kohana/auth',      // Basic authentication
+	//'cache'       => $vendor_path.'kohana/cache',     // Caching with multiple backends
+	//'codebench'   => $vendor_path.'kohana/codebench', // Benchmarking tool
+	//'database'    => $vendor_path.'kohana/database',  // Database access
+	//'image'       => $vendor_path.'kohana/image',     // Image manipulation
+	//'minion'      => $vendor_path.'kohana/minion',    // CLI Tasks
+	//'orm'         => $vendor_path.'kohana/orm',       // Object Relationship Mapping
+	//'unittest'    => $vendor_path.'kohana/unittest',  // Unit testing
+	//'userguide'   => $vendor_path.'kohana/userguide', // User guide and API documentation
+	'core'        => SYSPATH,                         // Core system
+]);
 
 /**
  * Set the default language
  */
 I18n::lang('en-us');
+
+if ( ! function_exists('__'))
+{
+	/**
+	 * I18n translate alias function.
+	 *
+	 * @deprecated 3.4 Use I18n::translate() instead
+	 */
+	function __($string, array $values = NULL, $lang = 'en-us')
+	{
+		return I18n::translate($string, $values, $lang);
+	}
+}
 
 if (isset($_SERVER['SERVER_PROTOCOL']))
 {
@@ -103,13 +133,8 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/tsech-kohana-v3.3.6/public',
-    'index_file'  => Kohana::$environment === Kohana::PRODUCTION,
-    'errors'      => Kohana::$environment !== Kohana::PRODUCTION,
-    'profile'     => Kohana::$environment !== Kohana::PRODUCTION,
-    'caching'     => Kohana::$environment === Kohana::PRODUCTION,
+	'base_url'   => '/kohana/',
 ));
-
 
 /**
  * Attach the file write to logging. Multiple writers are supported.
@@ -121,20 +146,8 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
  */
 Kohana::$config->attach(new Config_File);
 
-/**
- * Enable modules. Modules are referenced by a relative or absolute path.
- */
-Kohana::modules(array(
-	// 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-	));
+// Initialize modules
+Kohana::init_modules();
 
 /**
  * Cookie Salt
@@ -145,12 +158,12 @@ Kohana::modules(array(
  */
 // Cookie::$salt = NULL;
 
-
 /**
- * Include separate routes file
+ * Set the routes. Each route must have a minimum of a name, a URI and a set of
+ * defaults for the URI.
  */
-require_once APPPATH.'config/routes.php';
-
-
-// autoload psr4
-require_once '../vendor/autoload.php';
+Route::set('default', '(<controller>(/<action>(/<id>)))')
+	->defaults(array(
+		'controller' => 'welcome',
+		'action'     => 'index',
+	));
