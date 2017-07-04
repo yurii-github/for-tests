@@ -73,10 +73,10 @@ Kohana::modules([
 	//'auth'        => $vendor_path.'kohana/auth',      // Basic authentication
 	//'cache'       => $vendor_path.'kohana/cache',     // Caching with multiple backends
 	//'codebench'   => $vendor_path.'kohana/codebench', // Benchmarking tool
-	//'database'    => $vendor_path.'kohana/database',  // Database access
+	'database'    => $vendor_path.'kohana/database',  // Database access
 	//'image'       => $vendor_path.'kohana/image',     // Image manipulation
 	//'minion'      => $vendor_path.'kohana/minion',    // CLI Tasks
-	'orm'         => $vendor_path.'kohana/orm',       // Object Relationship Mapping
+	//'orm'         => $vendor_path.'kohana/orm',       // Object Relationship Mapping
 	//'unittest'    => $vendor_path.'kohana/unittest',  // Unit testing
 	//'userguide'   => $vendor_path.'kohana/userguide', // User guide and API documentation
 	'core'        => SYSPATH,                         // Core system

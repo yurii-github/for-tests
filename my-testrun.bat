@@ -1,1 +1,1 @@
-phpunit5 application/tests
+phpunit5 --bootstrap=application/tests/bootstrap.php application/tests
