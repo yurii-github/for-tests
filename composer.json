@@ -28,11 +28,6 @@
 		"kohana/minion": "3.4.*",
 		"kohana/orm": "3.4.*"
 	},
-	"require-dev": {
-		"phing/phing": "dev-master",
-		"kohana/unittest": "3.4.*",
-		"kohana/userguide": "3.4.*"
-	},
 	"minimum-stability": "dev",
 	"extra": {
 		"installer-paths": {
