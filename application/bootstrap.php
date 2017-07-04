@@ -104,7 +104,12 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/tsech-kohana-v3.3.6/',
+    'index_file'  => Kohana::$environment === Kohana::PRODUCTION,
+    'errors'      => Kohana::$environment !== Kohana::PRODUCTION,
+    'profile'     => Kohana::$environment !== Kohana::PRODUCTION,
+    'caching'     => Kohana::$environment === Kohana::PRODUCTION,
 ));
+
 
 /**
  * Attach the file write to logging. Multiple writers are supported.
