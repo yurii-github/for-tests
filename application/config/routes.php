@@ -9,6 +9,6 @@
  **************************************************************/
 Route::set('default', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(
-        'controller' => '\App\Controller\Welcome',
+        'controller' => '\App\Controller\DefaultController',
         'action'     => 'index',
     ));
