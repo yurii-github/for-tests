@@ -2,10 +2,15 @@
 namespace App\Model;
 
 class Client {
+    //TODO: security checks
+
     public $id;
     public $firstName;
     public $lastName;
     public $sex;
+    /**
+     * @var \DateTime
+     */
     public $birthDate;
 
     const SEX_FEMALE = 'female';

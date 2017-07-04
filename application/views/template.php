@@ -1,3 +1,8 @@
+<?php
+$isActive = function($route) {
+    return \Route::get($route)->matches(\Request::current()) !== false ? 'class="active"' :'';
+}
+?>
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
@@ -15,7 +20,6 @@
 </head>
 
 <body>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -26,11 +30,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="<?= url::base();?>">TEST</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li <?= $isActive('clients');?>><a href="<?= url::base();?>clients">Clients</a></li>
+                <li <?= $isActive('deposits');;?>><a href="<?= url::base();?>deposits">Deposits</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>

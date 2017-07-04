@@ -2,6 +2,8 @@
 namespace App\Model;
 
 class TransactionLog {
+    //TODO: security checks
+
     public $id;
     public $amount;
 
