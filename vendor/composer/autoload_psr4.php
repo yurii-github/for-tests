@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
+    'App\\' => array($baseDir . '/application/src'),
 );
