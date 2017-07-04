@@ -5,7 +5,6 @@ if (file_exists(__DIR__.'/database.local.php')) {
 }
 
 
-<?php
 return array
 (
     'default' => array
