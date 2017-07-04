@@ -150,3 +150,7 @@ Kohana::modules(array(
  * Include separate routes file
  */
 require_once APPPATH.'config/routes.php';
+
+
+// autoload psr4
+require_once '../vendor/autoload.php';
