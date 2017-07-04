@@ -17,6 +17,15 @@ $isActive = function($route) {
             text-align: center;
         }
     </style>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -35,9 +44,8 @@ $isActive = function($route) {
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li <?= $isActive('clients');?>><a href="<?= url::base();?>clients">Clients</a></li>
-                <li <?= $isActive('deposits');;?>><a href="<?= url::base();?>deposits">Deposits</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li <?= $isActive('deposits');?>><a href="<?= url::base();?>deposits">Deposits</a></li>
+                <li <?= $isActive('cron');?>><a href="<?= url::base();?>cron">Cron</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -47,13 +55,6 @@ $isActive = function($route) {
     <?php echo $content ?>
 </div>
 
-<script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 </body>
 </html>

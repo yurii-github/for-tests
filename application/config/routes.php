@@ -7,6 +7,18 @@
 /**************************************************************
  * Default Router
  **************************************************************/
+Route::set('cron', 'cron')
+    ->defaults(array(
+        'controller' => '\App\Controller\CronController',
+        'action'     => 'index',
+    ));
+
+Route::set('cron_run', 'cron-run')
+    ->defaults(array(
+        'controller' => '\App\Controller\CronController',
+        'action'     => 'run',
+    ));
+
 Route::set('clients', 'clients')
     ->defaults(array(
         'controller' => '\App\Controller\ClientController',

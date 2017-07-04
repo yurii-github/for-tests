@@ -40,4 +40,11 @@ class DepositManager {
         // <---
         return $deposit;
     }
+
+
+    public function payEarnings(\Date $date) {
+
+    }
+
+
 }
