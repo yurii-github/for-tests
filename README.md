@@ -1,8 +1,10 @@
 
 # Yurii's things
+Work URL: http://localhost/tsech-kohana-v3.3.6/public/
 
 ### Install
 1. change **base_url** in /application/bootstrap.php
+1. https://jtreminio.com/2012/03/getting-started-with-kohana-3-part-i/
 
 ### Checks
 1. upgrade notes about PHP7 http://garridodiaz.com/upgrading-kohana-3-3-x-to-php-7/ (in fact, it works on PHP7.. looks like)
