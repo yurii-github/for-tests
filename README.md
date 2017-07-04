@@ -1,3 +1,16 @@
+
+# Yurii's things
+
+### Install
+1. change **base_url** in /application/bootstrap.php
+
+### Checks
+1. upgrade notes about PHP7 http://garridodiaz.com/upgrading-kohana-3-3-x-to-php-7/ (in fact, it works on PHP7.. looks like)
+
+
+
+-------
+
 # Kohana PHP Framework
 
 [Kohana](http://kohanaframework.org/) is an elegant, open source, and object oriented HMVC framework built using PHP5, by a team of volunteers. It aims to be swift, secure, and small.
