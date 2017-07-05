@@ -156,7 +156,7 @@ Kohana::init_modules();
  * If you have not defined a cookie salt in your Cookie class then
  * uncomment the line below and define a preferrably long salt.
  */
-// Cookie::$salt = NULL;
+Cookie::$salt = 'some-salt';
 
 
 require_once APPPATH.'config/routes.php';
