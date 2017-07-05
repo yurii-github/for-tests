@@ -6,7 +6,8 @@ class DefaultController extends BaseController {
 
 	public function action_index()
 	{
-	    $this->template->set('content', \View::factory('default/index'));
+	    $content = $my_html = \Michelf\Markdown::defaultTransform(file_get_contents(__DIR__.'/../../../README.md'));
+	    $this->template->set('content', $content);
 	}
 
 }

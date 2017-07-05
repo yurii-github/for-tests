@@ -26,7 +26,8 @@
 		"kohana/database": "3.4.*",
 		"kohana/image": "3.4.*",
 		"kohana/minion": "3.4.*",
-		"kohana/orm": "3.4.*"
+		"kohana/orm": "3.4.*",
+		"michelf/php-markdown": "^1.7"
 	},
 	"minimum-stability": "dev",
 	"extra": {
