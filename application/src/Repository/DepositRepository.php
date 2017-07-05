@@ -165,7 +165,7 @@ EXTRACT(DAY FROM d.open_date) = EXTRACT(DAY FROM @d)
 GROUP BY d.id;
          */
         $query = <<<SQL
- SELECT  d.*, tl.id tl_id, c.id c_id, c.firstname as c_firstname, c.lastname as c_lastname  FROM tstech_test.deposit d
+ SELECT  d.*, tl.id tl_id, c.id c_id, c.firstname as c_firstname, c.lastname as c_lastname  FROM deposit d
  JOIN account_deposit ad ON ad.deposit_id = d.id
  JOIN account a ON a.id = ad.account_id
  JOIN client c ON c.id = a.client_id
@@ -218,7 +218,7 @@ SQL;
     {
 
         $query = <<<SQL
- SELECT  d.*, tl.id tl_id, c.id c_id, c.firstname as c_firstname, c.lastname as c_lastname  FROM tstech_test.deposit d
+ SELECT  d.*, tl.id tl_id, c.id c_id, c.firstname as c_firstname, c.lastname as c_lastname  FROM deposit d
  JOIN account_deposit ad ON ad.deposit_id = d.id
  JOIN account a ON a.id = ad.account_id
  JOIN client c ON c.id = a.client_id
