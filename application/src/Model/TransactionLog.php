@@ -11,6 +11,13 @@ class TransactionLog {
     const TYPE_COMMISSION = 'commission';
 
     /**
+     * @var \DateTime
+     */
+    public $logDate;
+
+
+    public $depositBalanceBefore;
+    /**
      * Nto1
      * @var Client
      */
@@ -27,9 +34,6 @@ class TransactionLog {
      */
     public $type;
 
-    // only for commission type
-    public $commissionPercent;
+    public $percent;
 
-    // only for payment type
-    public $paymentPercent;
 }

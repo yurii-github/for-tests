@@ -1,12 +1,11 @@
 <?php
-/**
- * Set the routes. Each route must have a minimum of a name, a URI and a set of
- * defaults for the URI.
- */
 
-/**************************************************************
- * Default Router
- **************************************************************/
+Route::set('reports', 'reports')
+    ->defaults(array(
+        'controller' => '\App\Controller\DepositController',
+        'action'     => 'reports',
+    ));
+
 Route::set('cron', 'cron')
     ->defaults(array(
         'controller' => '\App\Controller\CronController',

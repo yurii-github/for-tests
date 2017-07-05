@@ -35,3 +35,14 @@ CREATE TABLE `tstech_test`.`account` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `balance` DECIMAL(20,2) NULL,
   PRIMARY KEY (`id`));
+
+
+CREATE TABLE `tstech_test`.`transaction_log` (
+  `id` INT NOT NULL,
+  `client_id` INT NULL,
+  `type` ENUM('commision', 'payment') NULL,
+  `commission_percent` INT NULL,
+  `payment_percent` INT NULL,
+  `amount` DECIMAL(20,2) NULL,
+  `deposit_id` INT NULL,
+  PRIMARY KEY (`id`));

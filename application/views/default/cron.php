@@ -30,7 +30,7 @@
                 console.log(resp);
 
                 if(resp.data !== undefined) {
-                    $('#result').html(resp.data);
+                    $('#result').html(JSON.stringify(resp.data));
                 } else {
                     $('#result').html('something went wrong');
                 }

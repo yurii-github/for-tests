@@ -27,9 +27,6 @@ class ClientController extends BaseController
 
 
         \HTTP::redirect(\Route::get('clients')->uri());
-        //$this->request->redirect('clients');
-
-        //$this->template->set('content', \View::factory('default/index'));
     }
 
 

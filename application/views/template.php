@@ -45,6 +45,7 @@ $isActive = function($route) {
             <ul class="nav navbar-nav">
                 <li <?= $isActive('clients');?>><a href="<?= url::base();?>clients">Clients</a></li>
                 <li <?= $isActive('deposits');?>><a href="<?= url::base();?>deposits">Deposits</a></li>
+                <li <?= $isActive('reports');?>><a href="<?= url::base();?>reports">Reports</a></li>
                 <li <?= $isActive('cron');?>><a href="<?= url::base();?>cron">Cron</a></li>
             </ul>
         </div><!--/.nav-collapse -->

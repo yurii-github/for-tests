@@ -7,6 +7,11 @@ class Deposit {
     public $id;
 
     /**
+     * @var \DateTime
+     */
+    public $openDate;
+
+    /**
      * 1to1
      * @var Account
      */

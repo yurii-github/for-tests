@@ -22,14 +22,15 @@ class DepositController extends BaseController
         }
 
         $repoAccount = new AccountRepository();
-        $depoManager = new DepositManager(new DepositRepository(), $repoAccount);
 
         $account = new Account();
         $account->client = $client;
         $account->balance = $_POST['deposit_balance'];
         $repoAccount->insert($account);
 
-        $deposit = $depoManager->addDeposit($account, $_POST['deposit_name'], $account->balance, $_POST['deposit_percent']);
+        $deposit = $this->get('deposit')
+            ->addDeposit($account, $_POST['deposit_name'], $account->balance, $_POST['deposit_percent'],
+            \DateTime::createFromFormat('d/m/Y', $_POST['deposit_opendate']));
 
         \HTTP::redirect(\Route::get('deposits')->uri());
     }
@@ -47,10 +48,27 @@ class DepositController extends BaseController
             'deposits' => $deposits,
             'clients' => $clients
         ]));
-
-        //JSON $this->template = \View::factory('_json', ['content' => ]);
-
     }
+
+
+
+    public function action_reports() {
+        $repo = new DepositRepository();
+        $avgByGroup = $repo->report_AverageByGroup();
+
+        $yearmonth = $repo->report_IncomeYearmonth();
+
+        $this->template->set('content', \View::factory('default/reports', [
+            'avgByGroup' => $avgByGroup,
+            'yearmonth' => $yearmonth
+        ]));
+    }
+//        /
+    //}_AverageByGroup(
+
+
+
+
 
 
 }

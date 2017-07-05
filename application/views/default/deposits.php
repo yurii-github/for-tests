@@ -9,8 +9,9 @@
         <th>id</th>
         <th>client name</th>
         <th>deposit name</th>
+        <th>deposit open date</th>
         <th>balance</th>
-        <th>percent</th>
+        <th>percent, %</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
             <td><?= $deposit->id;?></td>
             <td><?= ($deposit->client->firstName . ' ' . $deposit->client->lastName)?></td>
             <td><?= htmlentities($deposit->name); ?></td>
+            <td><?= $deposit->openDate->format('Y-m-d');?></td>
             <td><?= $deposit->balance;?></td>
             <td><?= $deposit->depositPercent?>%</td>
         </tr>
@@ -37,13 +39,17 @@
 
             </td>
             <td><input name="deposit_name" /></td>
-            <td><input name="deposit_balance" /></td>
-            <td><input name="deposit_percent" type="number" />%</td>
+            <td>
+                <input
+                       type="text"
+                       name="deposit_opendate"
+                       placeholder="dd/yy/yyyy"
+                       onkeyup="var v = this.value;if (v.match(/^\d{2}$/) !== null) {this.value = v + '/';} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {this.value = v + '/';}"/>
+            </td>
+            <td><input name="deposit_balance" type="number"  /></td>
+            <td><input name="deposit_percent" type="number" /></td>
         </tr>
     </form>
-
-
-
 
     </tbody>
 </table>
