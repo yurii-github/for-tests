@@ -2,7 +2,7 @@
 
 Used Kohana 3.4/develop so I can use namespaces.
 
-Default work URL: **http://localhost/tsech-kohana-v3.3.6/public/**
+Default work URL: **http://localhost/tstech-kohana-v3.4-dev/public**
 
 ----
 
