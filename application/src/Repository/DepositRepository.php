@@ -20,13 +20,13 @@ class DepositRepository
     {
         $query = <<<SQL
 SELECT EXTRACT(YEAR_MONTH FROM log_date) yearmonth, SUM(total) income FROM (
-SELECT *, -SUM(amount) total FROM transaction_log
+SELECT *, SUM(amount) total FROM transaction_log
 WHERE type = 'commission'
 GROUP BY YEAR(log_date), MONTH(log_date)
 
 UNION
 
-SELECT *, SUM(amount) total FROM transaction_log
+SELECT *, -SUM(amount) total FROM transaction_log
 WHERE type = 'payment'
 GROUP BY YEAR(log_date), MONTH(log_date)
 
