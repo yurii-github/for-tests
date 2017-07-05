@@ -8,7 +8,7 @@ class ClientManagerTest extends PHPUnit_Framework_TestCase {
 
         $cr = new \App\Repository\ClientRepository();
 
-
+        //TODO: add tests
     }
 
 

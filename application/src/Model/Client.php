@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model;
 
-class Client {
+class Client
+{
     //TODO: security checks
 
     public $id;
@@ -27,13 +29,10 @@ class Client {
      */
     public $deposits;
 
-    public function setId($id) {
+    public function setFirstName($firstName)
+    {
 
-    }
-
-    public function setFirstName($firstName) {
-
-        if(strlen($firstName) < 1) {
+        if (strlen($firstName) < 1) {
             throw new \Exception('firstname is too short');
         }
 

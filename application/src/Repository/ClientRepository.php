@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repository;
 
 /*
@@ -9,17 +10,20 @@ namespace App\Repository;
 
 use App\Model\Client;
 
-class ClientRepository {
+class ClientRepository
+{
 
-    public function insert(Client $c) {
+    public function insert(Client $c)
+    {
         \DB::insert('client',
-                ['firstname', 'lastname', 'sex' , 'birthdate'])
+            ['firstname', 'lastname', 'sex', 'birthdate'])
             ->values(
                 [$c->firstName, $c->lastName, $c->sex, $c->birthDate->format('Y-m-d')])
             ->execute();
     }
 
-    public function findAll() {
+    public function findAll()
+    {
         /** @var \Database_Result_Cached $cache */
         $cache = \DB::select('*')->from('client')->execute();
 
@@ -38,7 +42,8 @@ class ClientRepository {
         return $data;
     }
 
-    public function find($id) {
+    public function find($id)
+    {
         /** @var \Database_Result_Cached $cache */
         $cache = \DB::select('*')->from('client')->where('id', '=', $id)->limit(1)->execute(null, '\App\Model\Client');
         return $cache[0];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Repository\AccountRepository;
@@ -6,13 +7,14 @@ use App\Repository\DepositRepository;
 use App\Repository\TransactionLogRepository;
 use App\SOA\DepositManager;
 
-class BaseController extends \Controller_Template {
+class BaseController extends \Controller_Template
+{
 
     private $services;
-
     private $knownServices = ['deposit' => DepositManager::class];
 
-    public function & get($service) {
+    public function & get($service)
+    {
         if (!empty($this->services[$service])) {
             return $this->services[$service];
         }
@@ -21,7 +23,7 @@ class BaseController extends \Controller_Template {
 
             if ($service == 'deposit') {
                 $this->services[$service] = new $this->knownServices[$service](new DepositRepository(),
-                new AccountRepository(), new TransactionLogRepository());
+                    new AccountRepository(), new TransactionLogRepository());
                 return $this->services[$service];
             }
         }

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model;
 
-class Account {
+class Account
+{
     //TODO: security checks
 
     public $id;

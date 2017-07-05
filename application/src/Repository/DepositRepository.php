@@ -43,7 +43,8 @@ SQL;
 2. II группа - От 25 до 50 лет
 3. III группа - От 50 лет
     */
-    public function report_AverageByGroup() {
+    public function report_AverageByGroup()
+    {
         $query = <<<SQL
 SELECT * FROM (
 SELECT COUNT(*) AS dep_count, 

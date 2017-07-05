@@ -3,17 +3,16 @@
 namespace App\SOA;
 
 use App\Model\Account;
-use App\Model\Client;
 use App\Model\Deposit;
 use App\Model\TransactionLog;
 use App\Repository\AccountRepository;
 use App\Repository\DepositRepository;
 use App\Repository\TransactionLogRepository;
-use Prophecy\Exception\Exception;
 
-class DepositManager {
+class DepositManager
+{
 
-    private $repoClient;
+    private $repoTransactionLog;
     private $repoAccount;
     private $repoDeposit;
 
@@ -36,7 +35,8 @@ class DepositManager {
      * @return Deposit
      * @throws \Exception
      */
-    public function addDeposit(Account $account, $name, $amount, $percent, \DateTime $cheatOpenDate) {
+    public function addDeposit(Account $account, $name, $amount, $percent, \DateTime $cheatOpenDate)
+    {
         if ($account->balance < $amount) {
             throw new \Exception('FAIL');
         }
@@ -62,7 +62,8 @@ class DepositManager {
      * (депозит с капитализацией). Каждый депозит выдается на индивидуальных условиях.
      * @param $date
      */
-    public function payDay($date) {
+    public function payDay($date)
+    {
 
         $totalPayed = 0;
         $totalDepositCount = 0;
@@ -71,10 +72,10 @@ class DepositManager {
         /**
          * @var Deposit[] $deposits
          */
-        while(!empty($deposits = $this->repoDeposit->findToPayLimit100($date))) {
+        while (!empty($deposits = $this->repoDeposit->findToPayLimit100($date))) {
             foreach ($deposits as $deposit) {
                 $balanceBefore = $deposit->balance;
-                $amount = $deposit->balance*($deposit->depositPercent/100);
+                $amount = $deposit->balance * ($deposit->depositPercent / 100);
                 $deposit->balance += $amount;
 
                 $log = new TransactionLog();
@@ -99,12 +100,13 @@ class DepositManager {
 
     /**
      * Со всех депозитов каждый месяц снимается комиссия за использование счета. Комиссия зависит от суммы на счету:
-    Баланс на счету: 0 - до 1000 у.е. Комиссия 5%, но не менее чем 50 у.е.
-    Баланс на счету: 1000 у.е. - до 10,000 у.е. Комисcия 6%
-    Баланс на счету: от 10,000 у.е. Комиссия 7%, но не более чем 5000 у.е.
+     * Баланс на счету: 0 - до 1000 у.е. Комиссия 5%, но не менее чем 50 у.е.
+     * Баланс на счету: 1000 у.е. - до 10,000 у.е. Комисcия 6%
+     * Баланс на счету: от 10,000 у.е. Комиссия 7%, но не более чем 5000 у.е.
      * @param $date
      */
-    public function commissionDay($date) {
+    public function commissionDay($date)
+    {
         $totalPayed = 0;
         $totalDepositCount = 0;
 
@@ -113,16 +115,16 @@ class DepositManager {
         }
 
         //TODO: as strategy
-        $small = function($amount) {
-            $com = $amount*0.05;
+        $small = function ($amount) {
+            $com = $amount * 0.05;
             return $com < 50 ? 50 : $com;
         };
-        $medium = function($amount) {
-            $com = $amount*0.06;
+        $medium = function ($amount) {
+            $com = $amount * 0.06;
             return $com;
         };
-        $big = function($amount) {
-            $com = $amount*0.07;
+        $big = function ($amount) {
+            $com = $amount * 0.07;
             return $com > 5000 ? 5000 : $com;
         };
 
@@ -130,13 +132,13 @@ class DepositManager {
         /**
          * @var Deposit[] $deposits
          */
-        while(!empty($deposits = $this->repoDeposit->findToCommission100($date))) {
+        while (!empty($deposits = $this->repoDeposit->findToCommission100($date))) {
             foreach ($deposits as $deposit) {
                 $commission = 0;
 
                 if ($deposit->balance >= 10000) {
                     $commission = $big($deposit->balance);
-                } elseif($deposit->balance < 10000 && $deposit->balance >= 1000) {
+                } elseif ($deposit->balance < 10000 && $deposit->balance >= 1000) {
                     $commission = $medium($deposit->balance);
                 } else {
                     $commission = $small($deposit->balance);
@@ -144,7 +146,7 @@ class DepositManager {
 
                 // less than month
                 if ($deposit->openDate->diff($date)->m < 1) {
-                    $commission = $commission/(int)$deposit->openDate->format('d');
+                    $commission = $commission / (int)$deposit->openDate->format('d');
                 }
 
                 if ($commission > $deposit->balance) {

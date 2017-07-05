@@ -1,16 +1,9 @@
 <?php
+
 namespace App\Controller;
 
-use App\Model\Account;
-use App\Model\Client;
-use App\Model\Deposit;
-use App\Repository\AccountRepository;
-use App\Repository\ClientRepository;
-use App\Repository\DepositRepository;
-use App\SOA\DepositManager;
-use Prophecy\Exception\Exception;
-
-class CronController extends BaseController {
+class CronController extends BaseController
+{
 
     public function action_index()
     {
@@ -20,7 +13,7 @@ class CronController extends BaseController {
 
     public function action_run()
     {
-        if($_POST['secretkey'] != 'ZzZ') {
+        if ($_POST['secretkey'] != 'ZzZ') {
             return $this->template = \View::factory('_json', ['content' => []]);
         }
 

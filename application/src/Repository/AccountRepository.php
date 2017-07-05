@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repository;
 
 /*
@@ -10,11 +11,13 @@ namespace App\Repository;
 use App\Model\Account;
 
 
-class AccountRepository {
+class AccountRepository
+{
 
-    public function insert(Account $account) {
+    public function insert(Account $account)
+    {
         $result = \DB::insert('account',
-                ['balance', 'client_id'])
+            ['balance', 'client_id'])
             ->values(
                 [$account->balance, $account->client->id])
             ->execute();
@@ -23,11 +26,10 @@ class AccountRepository {
             throw new \Exception('FAIL');
         }
         $account->id = $result[0];
-        
     }
 
-
-    public function update(Account $account) {
+    public function update(Account $account)
+    {
         $result = \DB::update('account')->set(['balance' => $account->balance])->where('id', '=', $account->id)->execute();
 
         if ($result !== 1) {

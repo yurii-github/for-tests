@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model;
 
-class Deposit {
+class Deposit
+{
     //TODO: security checks
 
     public $id;

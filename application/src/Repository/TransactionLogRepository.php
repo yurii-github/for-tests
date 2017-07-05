@@ -7,9 +7,6 @@ namespace App\Repository;
  *
  * but OK for test task!
  */
-
-use App\Model\Client;
-use App\Model\Deposit;
 use App\Model\TransactionLog;
 
 class TransactionLogRepository
@@ -30,7 +27,6 @@ class TransactionLogRepository
         }
 
     }
-
 
 
 }

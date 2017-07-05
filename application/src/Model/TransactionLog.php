@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model;
 
-class TransactionLog {
+class TransactionLog
+{
     //TODO: security checks
 
     public $id;
