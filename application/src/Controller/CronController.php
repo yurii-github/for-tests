@@ -24,6 +24,7 @@ class CronController extends BaseController
         }
 
         $this->template = \View::factory('_json', ['content' => ['data' => [
+            //TODO: secure payment order in abstraction
             'payed' => $this->get('deposit')->payDay($date),
             'commissioned' => $this->get('deposit')->commissionDay($date)
         ]]]);
