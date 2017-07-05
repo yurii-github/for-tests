@@ -53,7 +53,7 @@ $isActive = function($route) {
 </nav>
 
 <div class="container">
-    <?php echo $content ?>
+    <?= $content ?>
 </div>
 
 
