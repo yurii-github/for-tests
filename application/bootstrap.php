@@ -133,7 +133,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/tsech-kohana-v3.3.6/public/',
+	'base_url'   => '/tstech-kohana-v3.4-dev/public',
 ));
 
 /**
