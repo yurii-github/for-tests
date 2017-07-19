@@ -1,0 +1,14 @@
+{
+    "name": "yurii/123",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Yurii K.",
+            "email": "yurii-github@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {"Test\\" : "src//"}
+    }
+}
