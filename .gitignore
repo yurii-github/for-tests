@@ -1,0 +1,4 @@
+/.idea
+/build
+/application/config/database.local.php
+/vendor

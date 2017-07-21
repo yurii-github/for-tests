@@ -1,0 +1,41 @@
+{
+	"name": "kohana/kohana",
+	"description": "Kohana framework application skeleton",
+	"homepage": "http://kohanaframework.org",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Kohana Team",
+			"email": "team@kohanaframework.org",
+			"homepage": "http://kohanaframework.org/team",
+			"role": "developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/kohana/kohana/issues",
+		"forum": "http://discourse.kohanaframework.org",
+		"irc": "irc://irc.freenode.net/kohana",
+		"source": "http://github.com/kohana/kohana"
+	},
+	"require": {
+		"php": ">=5.4.0",
+		"kohana/core": "3.4.*",
+		"kohana/auth": "3.4.*",
+		"kohana/cache": "3.4.*",
+		"kohana/codebench": "3.4.*",
+		"kohana/database": "3.4.*",
+		"kohana/image": "3.4.*",
+		"kohana/minion": "3.4.*",
+		"kohana/orm": "3.4.*",
+		"michelf/php-markdown": "^1.7"
+	},
+	"minimum-stability": "dev",
+	"extra": {
+		"installer-paths": {
+			"vendor/{$vendor}/{$name}": ["type:kohana-module"]
+		}
+	},
+	"autoload": {
+		"psr-4": {"App\\": "application//src//"}
+	}
+}

@@ -1,0 +1,704 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c4d8f09f9392156dc2be67c53f42a2c8",
+    "packages": [
+        {
+            "name": "composer/installers",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/79ad876c7498c0bbfe7eed065b8651c93bfd6045",
+                "reference": "79ad876c7498c0bbfe7eed065b8651c93bfd6045",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "MODX Evo",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "moodle",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2017-04-24T06:37:16+00:00"
+        },
+        {
+            "name": "kohana/auth",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/auth.git",
+                "reference": "d7618d5a05633f70109e9da39b6fa3b0ba31f065"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/auth/zipball/d7618d5a05633f70109e9da39b6fa3b0ba31f065",
+                "reference": "d7618d5a05633f70109e9da39b6fa3b0ba31f065",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official Kohana auth module",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "Authentication",
+                "framework",
+                "kohana"
+            ],
+            "time": "2015-11-26 00:09:35"
+        },
+        {
+            "name": "kohana/cache",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/cache.git",
+                "reference": "d577de28dae98cbb4a67b90ef36090431e3d9ed7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/cache/zipball/d577de28dae98cbb4a67b90ef36090431e3d9ed7",
+                "reference": "d577de28dae98cbb4a67b90ef36090431e3d9ed7",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official Kohana cache management module",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "cache",
+                "framework",
+                "kohana"
+            ],
+            "time": "2016-01-25 09:32:49"
+        },
+        {
+            "name": "kohana/codebench",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/codebench.git",
+                "reference": "e4e10c23d56dfb02112b81f1a862290576f0524d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/codebench/zipball/e4e10c23d56dfb02112b81f1a862290576f0524d",
+                "reference": "e4e10c23d56dfb02112b81f1a862290576f0524d",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official Kohana benchmarking module",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "benchmarking",
+                "framework",
+                "kohana"
+            ],
+            "time": "2015-11-26 00:11:57"
+        },
+        {
+            "name": "kohana/core",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/core.git",
+                "reference": "3fcd16aa0d04c1cba8cf97faf56b993a6dc72c3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/core/zipball/3fcd16aa0d04c1cba8cf97faf56b993a6dc72c3e",
+                "reference": "3fcd16aa0d04c1cba8cf97faf56b993a6dc72c3e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/log": "1.*"
+            },
+            "require-dev": {
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev",
+                "mikey179/vfsstream": "^1.6"
+            },
+            "suggest": {
+                "ext-curl": "*",
+                "ext-http": "*",
+                "ext-mcrypt": "*"
+            },
+            "type": "library",
+            "extra": {
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "Core system classes for the Kohana application framework",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "framework",
+                "kohana"
+            ],
+            "time": "2016-08-16 08:58:09"
+        },
+        {
+            "name": "kohana/database",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/database.git",
+                "reference": "b0d8a94f6c58669714837963c2bcfe0bee56defc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/database/zipball/b0d8a94f6c58669714837963c2bcfe0bee56defc",
+                "reference": "b0d8a94f6c58669714837963c2bcfe0bee56defc",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "suggest": {
+                "ext-mysql": "*",
+                "ext-pdo": "*"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official Kohana module for database interactions, building queries, and prepared statements",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "database",
+                "framework",
+                "kohana"
+            ],
+            "time": "2017-05-02 09:32:02"
+        },
+        {
+            "name": "kohana/image",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/image.git",
+                "reference": "46d9cf40781dd8603c7c98a424e4a22b95cc5135"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/image/zipball/46d9cf40781dd8603c7c98a424e4a22b95cc5135",
+                "reference": "46d9cf40781dd8603c7c98a424e4a22b95cc5135",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "suggest": {
+                "ext-gd": "*"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official Kohana module for manipulating images",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "framework",
+                "image",
+                "kohana"
+            ],
+            "time": "2016-01-26 12:56:19"
+        },
+        {
+            "name": "kohana/minion",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/minion.git",
+                "reference": "303e2f26c113e182bedfd598f8ababf96dd44688"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/minion/zipball/303e2f26c113e182bedfd598f8ababf96dd44688",
+                "reference": "303e2f26c113e182bedfd598f8ababf96dd44688",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official kohana module for running tasks via the CLI.",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "cli",
+                "console",
+                "framework",
+                "kohana",
+                "minion",
+                "task"
+            ],
+            "time": "2016-02-03 06:46:58"
+        },
+        {
+            "name": "kohana/orm",
+            "version": "dev-3.4/develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kohana/orm.git",
+                "reference": "9edc57cc7d760388751474aeb3a15867c08326a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kohana/orm/zipball/9edc57cc7d760388751474aeb3a15867c08326a2",
+                "reference": "9edc57cc7d760388751474aeb3a15867c08326a2",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "kohana/core": ">=3.4",
+                "kohana/database": ">=3.4",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kohana/core": "3.4.*@dev",
+                "kohana/database": "3.4.*@dev",
+                "kohana/koharness": "*@dev",
+                "kohana/unittest": "3.4.*@dev"
+            },
+            "type": "kohana-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.3/develop": "3.3.x-dev",
+                    "dev-3.4/develop": "3.4.x-dev"
+                },
+                "installer-paths": {
+                    "vendor/{$vendor}/{$name}": [
+                        "type:kohana-module"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kohana Team",
+                    "email": "team@kohanaframework.org",
+                    "homepage": "http://kohanaframework.org/team",
+                    "role": "developer"
+                }
+            ],
+            "description": "The official Kohana ORM module",
+            "homepage": "http://kohanaframework.org",
+            "keywords": [
+                "database",
+                "framework",
+                "kohana",
+                "orm"
+            ],
+            "time": "2015-11-26 06:12:04"
+        },
+        {
+            "name": "michelf/php-markdown",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michelf/php-markdown.git",
+                "reference": "1f51cc520948f66cd2af8cbc45a5ee175e774220"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/1f51cc520948f66cd2af8cbc45a5ee175e774220",
+                "reference": "1f51cc520948f66cd2af8cbc45a5ee175e774220",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-lib": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Michelf": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michel Fortin",
+                    "email": "michel.fortin@michelf.ca",
+                    "homepage": "https://michelf.ca/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "John Gruber",
+                    "homepage": "https://daringfireball.net/"
+                }
+            ],
+            "description": "PHP Markdown",
+            "homepage": "https://michelf.ca/projects/php-markdown/",
+            "keywords": [
+                "markdown"
+            ],
+            "time": "2016-10-29T18:58:20+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2016-10-10 12:19:37"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.4.0"
+    },
+    "platform-dev": []
+}
