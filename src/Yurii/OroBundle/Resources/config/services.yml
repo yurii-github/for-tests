@@ -1,0 +1,22 @@
+services:
+#    oro.example:
+#        class: Yurii\OroBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    oro.loader:
+       class: Yurii\OroBundle\Routing\OroLoader
+
+    oro.router:
+       parent: router.default # TODO: why .default?
+       class: Yurii\OroBundle\Routing\OroRouter # TODO: why Router name in use?
+       calls:
+           - method: setOroLoader
+             arguments:
+                 - 'oro.loader'
+
+    oro.decorating_translator: # SF 3.2+
+        class:     Yurii\OroBundle\Translation\DecoratedTranslator
+        decorates: translator
+        arguments:
+            - '@oro.decorating_translator.inner'
+        public:    false
