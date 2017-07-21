@@ -1,0 +1,35 @@
+
+STRUCTURE
+
+/app/				this app			
+/framework/		custom mvc implementation for this test
+/error.log			any uncaught recoverable error will be logged here
+/yourDataFile.txt	your provided exported array variable
+/run.bat			just runs this app console under windows
+/index.php			entry point for this app
+/tests				contains phpunit tests
+	/reports		contains generated code coverage reports
+
+	
+USAGE
+
+simple run can be next:		run.bat print --file=YourDataFile.txt
+where file parameter can contain just file name if file is located in same dir as index.php or full filepath like C:\dir\yourFile
+
+
+HANDLING ERRORS
+
+app has error logger via php error handler
+app can catch most of its errors
+
+
+BUG
+
+because eval() is unsecure, i cannot fully check input data, i did sample check on content start as 'array(' but it is ot enough.
+So if bad data was provided app will fail with parse error or can be used to compromise app. Better was is to use serialization, but as
+task requires such input I was forced to keep it that way.
+
+ 
+TESTS
+
+due to small amount of time i did unit testing only for critical part in model and some demonstration for functional testing of controller
