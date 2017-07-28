@@ -28,6 +28,15 @@ CREATE TABLE `views` (
   PRIMARY KEY (`view_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DELIMITER $$
+
+CREATE TRIGGER view_hash_trigger BEFORE INSERT ON views FOR EACH ROW
+BEGIN
+
+ SET NEW.view_hash = SHA1(CONCAT(NEW.ip_address,NEW.page_url,NEW.user_agent,NEW.ip_version));
+
+ END$$
+ 
 # SET HASH
 UPDATE views v1 SET v1.view_hash = SHA1(CONCAT(v1.ip_address,v1.page_url,v1.user_agent,v1.ip_version));
 
