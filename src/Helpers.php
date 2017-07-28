@@ -21,7 +21,7 @@ class Helpers {
      * @return string
      */
     static public function getRequestUrl() {
-        if (empty($url = $_SERVER['HTTP_REFERER'])) {
+        if (empty($url = @$_SERVER['HTTP_REFERER'])) {
             $url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         }
         return $url;

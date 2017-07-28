@@ -15,6 +15,7 @@ namespace Test;
 final class BannerView {
 
     private static $tb = 'views';
+    private static $strategy = 'hash'; // '3keys'
 
     /**
      * @var Database
@@ -31,14 +32,26 @@ final class BannerView {
     }
 
     public static function findByComplex($ip, $url, $userAgent) {
-        $stmt = self::$db->getPDO()->prepare("SELECT * FROM ".self::$tb." WHERE ip_address = :ip AND page_url = :page_url AND user_agent = :agent AND ip_version = :ip_version LIMIT 1");
-        $stmt->bindValue(':ip', ip2long($ip));
-        $stmt->bindValue(':ip_version', \Test\Helpers::getIPVersion($ip)); // TODO: add IPv6 support
-        $stmt->bindValue(':page_url', $url);
-        $stmt->bindValue(':agent', $userAgent);
-        $stmt->execute();
 
-        return $stmt->fetchObject(static::class);
+        if (self::$strategy == '3keys') {
+            $stmt = self::$db->getPDO()->prepare("SELECT * FROM ".self::$tb." WHERE ip_address = :ip AND page_url = :page_url AND user_agent = :agent AND ip_version = :ip_version LIMIT 1");
+            $stmt->bindValue(':ip', ip2long($ip));
+            $stmt->bindValue(':ip_version', \Test\Helpers::getIPVersion($ip)); // TODO: add IPv6 support
+            $stmt->bindValue(':page_url', $url);
+            $stmt->bindValue(':agent', $userAgent);
+            $stmt->execute();
+
+            return $stmt->fetchObject(static::class);
+        }
+
+        if (self::$strategy == 'hash') {
+            $stmt = self::$db->getPDO()->prepare("SELECT * FROM ".self::$tb." WHERE view_hash = :view_hash LIMIT 1");
+            $stmt->bindValue(':view_hash', sha1(ip2long($ip).$url.$userAgent.\Test\Helpers::getIPVersion($ip))); // TODO: add IPv6 support
+            $stmt->execute();
+
+            return $stmt->fetchObject(static::class);
+        }
+
     }
 
     /**
@@ -62,16 +75,28 @@ final class BannerView {
 
 
     public function incrementView($count) {
-        self::$db->getPDO()
-            ->prepare("UPDATE ".self::$tb." SET  view_date = :view_date, views_count = views_count + :views_count WHERE ip_address = :ip AND page_url = :page_url AND user_agent = :agent AND ip_version = :ip_version")
-            ->execute([
-                ':view_date' => (new \DateTime())->format('Y-m-d H:i:s'),
-                ':views_count' => (int)$count,
-                ':ip' => ip2long($this->ip_address), // TODO: add IPv6 support
-                ':page_url' => $this->page_url,
-                ':agent' => $this->user_agent,
-                ':ip_version' => \Test\Helpers::getIPVersion($this->ip_address),
-            ]);
+        if (self::$strategy == '3keys') {
+            self::$db->getPDO()
+                ->prepare("UPDATE ".self::$tb." SET  view_date = :view_date, views_count = views_count + :views_count WHERE ip_address = :ip AND page_url = :page_url AND user_agent = :agent AND ip_version = :ip_version")
+                ->execute([
+                    ':view_date' => (new \DateTime())->format('Y-m-d H:i:s'),
+                    ':views_count' => (int)$count,
+                    ':ip' => ip2long($this->ip_address), // TODO: add IPv6 support
+                    ':page_url' => $this->page_url,
+                    ':agent' => $this->user_agent,
+                    ':ip_version' => \Test\Helpers::getIPVersion($this->ip_address),
+                ]);
+        }
+
+        if (self::$strategy == 'hash') {
+            self::$db->getPDO()
+                ->prepare("UPDATE ".self::$tb." SET  view_date = :view_date, views_count = views_count + :views_count WHERE view_hash = :view_hash")
+                ->execute([
+                    ':view_date' => (new \DateTime())->format('Y-m-d H:i:s'),
+                    ':views_count' => (int)$count,
+                    ':view_hash' => $this->view_hash
+                ]);
+        }
     }
 
 
