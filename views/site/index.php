@@ -16,24 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Dish'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             'user_id',
             'created_at',
             'updated_at',
-            //'prep_time:datetime',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'prep_time:integer',
         ],
     ]); ?>
     <?php Pjax::end(); ?>

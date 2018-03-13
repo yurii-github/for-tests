@@ -6,6 +6,7 @@ use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -170,9 +171,22 @@ class Dish extends \yii\db\ActiveRecord
         }
 
         $ids = ArrayHelper::getColumn($this->products, 'id');
+        $countProducts = count($ids);
 
-        foreach ($ids as $id) {
-            $query->andWhere(['id' => $id]);
+        if ($countProducts) {
+
+
+            $lookupQuery = Dish::find()
+                ->alias('d')
+                ->select([new Expression('COUNT(d.id) total')])
+                ->innerJoinWith('dishProducts', false)
+                ->andWhere(['d.id' => new Expression('d2.id')])
+                ->groupBy(['d.id'])
+                ->having(['total' => $countProducts]);
+
+            $query->alias('d2')
+                ->select(['d2.*', 'total' => $lookupQuery])
+                ->having(['total' => $countProducts]);
         }
 
         return $dataProvider;
