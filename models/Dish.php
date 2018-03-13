@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveQuery;
 use yii\db\Exception;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
@@ -45,7 +46,7 @@ class Dish extends \yii\db\ActiveRecord
         return [
             [['user_id', 'prep_time', 'created_at', 'updated_at', 'products'], 'safe', 'on' => self::SCENARIO_SEARCH],
             [['user_id', 'prep_time'], 'integer'],
-            [['created_at', 'updated_at', 'prep_time'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREATE]],
+            [['prep_time'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREATE]],
             [['created_at', 'updated_at', 'products'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -175,8 +176,7 @@ class Dish extends \yii\db\ActiveRecord
 
         if ($countProducts) {
 
-
-            $lookupQuery = Dish::find()
+            $lookupQueryFullMatch = Dish::find()
                 ->alias('d')
                 ->select([new Expression('COUNT(d.id) total')])
                 ->innerJoinWith('dishProducts', false)
@@ -184,8 +184,18 @@ class Dish extends \yii\db\ActiveRecord
                 ->groupBy(['d.id'])
                 ->having(['total' => $countProducts]);
 
+            $lookupQueryMinMatch = Dish::find()
+                ->alias('d')
+                ->select([new Expression('COUNT(d.id) total')])
+                ->innerJoinWith(['dishProducts' => function(ActiveQuery $query) use ($ids) {
+                    $query->alias('p')->andOnCondition(['p.product_id' => $ids]);
+                }], false)
+                ->andWhere(['d.id' => new Expression('d2.id')])
+                ->groupBy(['d.id'])
+                ->having(['total' => $countProducts]);
+
             $query->alias('d2')
-                ->select(['d2.*', 'total' => $lookupQuery])
+                ->select(['d2.*', 'total' => $lookupQueryMinMatch])
                 ->having(['total' => $countProducts]);
         }
 
