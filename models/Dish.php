@@ -93,7 +93,6 @@ class Dish extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return array_merge(parent::scenarios(), [
-            self::SCENARIO_CREATE => ['title', 'prep_time', 'products'],
             self::SCENARIO_CREATE => ['title', 'prep_time', 'products', 'created_at', 'updated_at']
         ]);
     }
