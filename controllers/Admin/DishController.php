@@ -65,6 +65,7 @@ class DishController extends Controller
     public function actionCreate()
     {
         $model = new Dish();
+        $model->setScenario(Dish::SCENARIO_CREATE);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

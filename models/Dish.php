@@ -19,6 +19,8 @@ use Yii;
  */
 class Dish extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
+
     /**
      * @inheritdoc
      */
@@ -34,11 +36,31 @@ class Dish extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'prep_time'], 'integer'],
-            [['created_at', 'updated_at'], 'required'],
+            [['created_at', 'updated_at', 'prep_time'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->getScenario() === self::SCENARIO_CREATE) {
+            $this->created_at = (new \DateTime())->format('Y-m-d H:i:s');
+            //$this->user_id =
+        }
+
+        $this->updated_at = (new \DateTime())->format('Y-m-d H:i:s');
+
+        return parent::beforeSave($insert);
+    }
+
+
+    public function scenarios()
+    {
+        return array_merge(parent::scenarios(), [
+            self::SCENARIO_CREATE => ['title', 'prep_time']
+        ]);
     }
 
     /**

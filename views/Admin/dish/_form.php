@@ -11,15 +11,9 @@ use yii\widgets\ActiveForm;
 <div class="dish-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?= $form->errorSummary($model); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
     <?= $form->field($model, 'prep_time')->textInput() ?>
 
     <div class="form-group">
