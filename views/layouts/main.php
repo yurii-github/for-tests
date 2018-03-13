@@ -44,7 +44,7 @@ AppAsset::register($this);
                 ['label' => 'Main', 'url' => ['/Admin/index']],
                 ['label' => 'Product', 'url' => ['/Admin/product']],
                 ['label' => 'Dish', 'url' => ['/Admin/dish']],
-                Yii::$app->user->isGuest ? (
+               /* Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
                 ) : (
                     '<li>'
@@ -55,7 +55,7 @@ AppAsset::register($this);
                     )
                     . Html::endForm()
                     . '</li>'
-                )
+                )*/
             ],
         ]);
     } else { // FRONT
@@ -63,10 +63,8 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'ADMIN ZONE', 'url' => ['/Admin/index']],
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-                Yii::$app->user->isGuest ? (
+                ['label' => 'Main', 'url' => ['/site/index']],
+               /* Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
                 ) : (
                     '<li>'
@@ -77,7 +75,7 @@ AppAsset::register($this);
                     )
                     . Html::endForm()
                     . '</li>'
-                )
+                )*/
             ],
         ]);
     }
