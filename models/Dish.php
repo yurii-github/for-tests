@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\InvalidArgumentException;
 
 /**
  * This is the model class for table "dish".
@@ -16,6 +17,8 @@ use Yii;
  *
  * @property User $user
  * @property DishProduct[] $dishProducts
+ *
+ * @property Product[] $products
  */
 class Dish extends \yii\db\ActiveRecord
 {
@@ -37,10 +40,26 @@ class Dish extends \yii\db\ActiveRecord
         return [
             [['user_id', 'prep_time'], 'integer'],
             [['created_at', 'updated_at', 'prep_time'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'products'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
+    }
+
+    public function setProducts($value)
+    {
+        if (is_array($value)) {
+            $ids = [];
+            foreach ($value as $item) {
+                if ($item instanceof Product) {
+                    $ids[] = $item->id;
+                } else {
+                    $ids[] = $item;
+                }
+            }
+            $products = Product::find()->where(['id' => $ids])->all();
+            $this->products = $products;
+        }
     }
 
     public function beforeSave($insert)
@@ -49,17 +68,22 @@ class Dish extends \yii\db\ActiveRecord
             $this->created_at = (new \DateTime())->format('Y-m-d H:i:s');
             //$this->user_id =
         }
-
         $this->updated_at = (new \DateTime())->format('Y-m-d H:i:s');
 
         return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->addProducts($this->products);
+        return parent::afterSave($insert, $changedAttributes);
     }
 
 
     public function scenarios()
     {
         return array_merge(parent::scenarios(), [
-            self::SCENARIO_CREATE => ['title', 'prep_time']
+            self::SCENARIO_CREATE => ['title', 'prep_time', 'products']
         ]);
     }
 
@@ -84,6 +108,27 @@ class Dish extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function addProducts(array $products = [])
+    {
+        $this->unlinkAll('products', true);
+
+        foreach ($products as $product) {
+            if (!($product instanceof Product)) {
+                throw new InvalidArgumentException('not product model');
+            }
+            $this->link('products', $product);
+        }
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Product::class, ['id' => 'product_id'])
+            ->via('dishProducts');
     }
 
     /**
