@@ -1,0 +1,6 @@
+<?php
+
+
+?>
+
+admin index page
