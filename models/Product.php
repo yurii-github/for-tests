@@ -18,6 +18,8 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
+
     /**
      * @inheritdoc
      */
@@ -38,6 +40,26 @@ class Product extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->getScenario() === self::SCENARIO_CREATE) {
+            $this->created_at = (new \DateTime())->format('Y-m-d H:i:s');
+            //$this->user_id =
+        }
+
+        $this->updated_at = (new \DateTime())->format('Y-m-d H:i:s');
+
+        return parent::beforeSave($insert);
+    }
+
+
+    public function scenarios()
+    {
+        return array_merge(parent::scenarios(), [
+            self::SCENARIO_CREATE => ['title']
+        ]);
     }
 
     /**
