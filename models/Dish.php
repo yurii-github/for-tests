@@ -4,6 +4,9 @@ namespace app\models;
 
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\ActiveDataProvider;
+use yii\db\Exception;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "dish".
@@ -23,6 +26,7 @@ use yii\base\InvalidArgumentException;
 class Dish extends \yii\db\ActiveRecord
 {
     const SCENARIO_CREATE = 'create';
+    const SCENARIO_SEARCH = 'search';
 
     /**
      * @inheritdoc
@@ -38,8 +42,9 @@ class Dish extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['user_id', 'prep_time', 'created_at', 'updated_at', 'products'], 'safe', 'on' => self::SCENARIO_SEARCH],
             [['user_id', 'prep_time'], 'integer'],
-            [['created_at', 'updated_at', 'prep_time'], 'required'],
+            [['created_at', 'updated_at', 'prep_time'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREATE]],
             [['created_at', 'updated_at', 'products'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -64,6 +69,10 @@ class Dish extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
+        if ($this->getScenario() === self::SCENARIO_SEARCH) {
+            throw new Exception('cannot save in search mode');
+        }
+
         if ($this->getScenario() === self::SCENARIO_CREATE) {
             $this->created_at = (new \DateTime())->format('Y-m-d H:i:s');
             //$this->user_id =
@@ -79,11 +88,11 @@ class Dish extends \yii\db\ActiveRecord
         return parent::afterSave($insert, $changedAttributes);
     }
 
-
     public function scenarios()
     {
         return array_merge(parent::scenarios(), [
-            self::SCENARIO_CREATE => ['title', 'prep_time', 'products']
+            self::SCENARIO_CREATE => ['title', 'prep_time', 'products'],
+            self::SCENARIO_CREATE => ['title', 'prep_time', 'products', 'created_at', 'updated_at']
         ]);
     }
 
@@ -137,5 +146,35 @@ class Dish extends \yii\db\ActiveRecord
     public function getDishProducts()
     {
         return $this->hasMany(DishProduct::className(), ['dish_id' => 'id']);
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = Dish::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $ids = ArrayHelper::getColumn($this->products, 'id');
+
+        foreach ($ids as $id) {
+            $query->andWhere(['id' => $id]);
+        }
+
+        return $dataProvider;
     }
 }
