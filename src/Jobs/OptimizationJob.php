@@ -1,5 +1,7 @@
 <?php
-namespace dio;
+namespace dio\Jobs;
+
+use dio\Entities\Event;
 
 class OptimizationJob
 {
@@ -7,7 +9,7 @@ class OptimizationJob
     {
         $campaignDS = new CampaignDataSource();
 
-        // array of Campagin objects
+        // array of Campaign objects
         $campaigns = $campaignDS->getCampaigns();
 
 

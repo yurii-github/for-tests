@@ -1,5 +1,5 @@
 <?php
-namespace dio;
+namespace dio\Entities;
 
 class Event
 {

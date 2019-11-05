@@ -1,6 +1,6 @@
 <?php
 
-namespace dio;
+namespace dio\Entities;
 
 class Campaign
 {
@@ -10,8 +10,7 @@ class Campaign
     /** @var  int */
     private $id;
 
-    /** @var  array */
-    private $publisherBlacklist;
+    private $publisherBlacklist = [];
 
     public function getOptimizationProps()
     {
@@ -23,6 +22,6 @@ class Campaign
     }
     public function saveBlacklist($blacklist)
     {
-        // dont implement
+        // don't implement
     }
 }
