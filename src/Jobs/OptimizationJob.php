@@ -1,21 +1,17 @@
 <?php
 namespace dio\Jobs;
 
-use dio\Entities\Event;
+use dio\Repositories\CampaignDataSource;
+use dio\Repositories\EventsDataSource;
 
 class OptimizationJob
 {
     public function run()
     {
-        $campaignDS = new CampaignDataSource();
-
         // array of Campaign objects
-        $campaigns = $campaignDS->getCampaigns();
+        $campaigns = (new CampaignDataSource())->getCampaigns();
 
-
-        $eventsDS = new EventsDataSource();
-        /** @var Event $event */
-        foreach ($eventsDS->getEventsSince("2 weeks ago") as $event) {
+        foreach ((new EventsDataSource())->getEventsSince("2 weeks ago") as $event) {
             // START HERE
         }
     }

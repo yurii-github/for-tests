@@ -16,6 +16,7 @@ class Campaign
     {
         return $this->optProps;
     }
+
     public function getBlackList()
     {
         return $this->publisherBlacklist;
