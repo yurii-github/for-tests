@@ -1,7 +1,7 @@
 
 ## The Task
 
-Our advertising platform promotes mobile applications. It contains a campaign for each such application our publishers bring users on that install and 
+Our advertising platform promotes mobile applications. It contains a campaign for each such application our publishers bring users that install and 
 then use these applications. The platform is reported about the install event and other application usage events of these users, for example - 
 "app_open", "registration" and "purchase" events. This stream of events is saved in a database.
 

@@ -3,6 +3,11 @@ namespace dio\Entities;
 
 class Event
 {
+    const TYPE_INSTALL = 'install';
+    const TYPE_APP_OPEN = 'app_open';
+    const TYPE_PURCHASE = 'purchase';
+    // ...
+
     private $type;
     private $campaignId;
     private $publisherId;
