@@ -81,7 +81,7 @@ class OptimizationJob
                 // NOTE: change control logic here!
                 if ($blacklistItem['pass'] === static::PASSED_ALL ||
                     $blacklistItem['pass'] === static::PASSED_RATIO ||
-                    $blacklistItem['pass'] === static::PASSED_THRESHOLD ) {
+                    $blacklistItem['pass'] === static::PASSED_THRESHOLD) {
                     unset($blacklist[$campaignId][$publisherId]);
                 }
             }

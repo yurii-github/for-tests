@@ -28,6 +28,17 @@ Below is the beginning of the implementation of the `OptimizationJob` class,
 
 ## Dev
 
+code fix
 ```
 ./vendor/bin/php-cs-fixer fix
+```
+
+run tests
+```
+./vendor/bin/phpunit
+```
+
+run job
+```
+./run
 ```
