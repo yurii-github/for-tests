@@ -1,14 +1,22 @@
 <?php
-
 namespace dio\Jobs;
 
 use dio\Entities\Campaign;
 use dio\Entities\Event;
+use dio\Events\BlacklistUpdated;
 use dio\Repositories\CampaignDataSource;
 use dio\Repositories\EventsDataSource;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class OptimizationJob
 {
+    protected $dispatcher;
+
+    public function __construct(EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     public function run()
     {
         $campaigns = (new CampaignDataSource())->getCampaigns();
@@ -59,11 +67,15 @@ class OptimizationJob
             }
         }
 
-        // save
-        foreach ($blacklist as $campaignId => $campaignBlacklist) {
-            $findCampaign($campaignId)->saveBlacklist($campaignBlacklist);
+        // update blacklist
+        foreach ($campaigns as $campaign) {
+            if ($blacklistItem = $blacklist[$campaign->getId()] ?? null) {
+                $oldBlackList = $campaign->getBlackList();
+                $newBlacklist = array_keys($blacklistItem);
+                $campaign->saveBlacklist($newBlacklist);
+                // B. publishers are notified with an email whenever they are added or removed from a campaign's blacklist
+                $this->dispatcher->dispatch(new BlacklistUpdated($campaign, $oldBlackList));
+            }
         }
-
-        var_dump($blacklist);
     }
 }

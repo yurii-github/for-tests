@@ -10,7 +10,7 @@ class Campaign
     private $optProps;
     /** @var int */
     private $id;
-    /** @var array */
+    /** @var array[publisherId] */
     private $publisherBlacklist = [];
 
     public function getId()
