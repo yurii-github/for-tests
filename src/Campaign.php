@@ -1,5 +1,6 @@
 <?php
-class Campaign {
+class Campaign
+{
     /** @var  OptimizationProps $optProps */
     private $optProps;
 
@@ -9,13 +10,16 @@ class Campaign {
     /** @var  array */
     private $publisherBlacklist;
 
-    public function getOptimizationProps() {
+    public function getOptimizationProps()
+    {
         return $this->optProps;
     }
-    public function getBlackList() {
+    public function getBlackList()
+    {
         return $this->publisherBlacklist;
     }
-    public function saveBlacklist($blacklist) {
+    public function saveBlacklist($blacklist)
+    {
         // dont implement
     }
 }

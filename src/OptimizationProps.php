@@ -1,4 +1,8 @@
 <?php
-class OptimizationProps {
-    public $threshold, $sourceEvent, $measuredEvent, $ratioThreshold;
+class OptimizationProps
+{
+    public $threshold;
+    public $sourceEvent;
+    public $measuredEvent;
+    public $ratioThreshold;
 }
