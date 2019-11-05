@@ -14,4 +14,14 @@ class BlacklistUpdated extends Event
         $this->campaign = $campaign;
         $this->oldBlacklist = $oldBlacklist;
     }
+
+    public function getNewBlackList()
+    {
+        return $this->campaign->getBlackList();
+    }
+
+    public function getOldBlackList()
+    {
+        return $this->oldBlacklist;
+    }
 }

@@ -3,12 +3,16 @@ namespace dio\Entities;
 
 class OptimizationProps
 {
-    /** @var int */
     public $threshold;
-    /** @var string */
     public $sourceEvent;
-    /** @var string */
     public $measuredEvent;
-    /** @var int */
     public $ratioThreshold;
+
+    public function __construct(int $threshold, string $sourceEvent, string $measuredEvent, float $ratioThreshold)
+    {
+        $this->threshold = $threshold;
+        $this->sourceEvent = $sourceEvent;
+        $this->measuredEvent = $measuredEvent;
+        $this->ratioThreshold = $ratioThreshold;
+    }
 }

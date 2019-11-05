@@ -8,4 +8,8 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 $dispatcher = new EventDispatcher();
 $dispatcher->addListener(\dio\Events\BlacklistUpdated::class, [new \dio\EventListeners\SendEmailToPublisher(), 'onEvent']);
 
-(new \dio\Jobs\OptimizationJob($dispatcher))->run();
+(new \dio\Jobs\OptimizationJob(
+    $dispatcher,
+    new \dio\Repositories\CampaignDataSource(),
+    new \dio\Repositories\EventsDataSource())
+)->run();

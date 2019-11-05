@@ -1,5 +1,4 @@
 <?php
-
 namespace dio\Entities;
 
 class Event
@@ -14,6 +13,13 @@ class Event
     private $publisherId;
     /** @var ?? */
     private $ts;
+
+    public function __construct($type, $campaignId, $publisherId)
+    {
+        $this->type = $type;
+        $this->campaignId = $campaignId;
+        $this->publisherId = $publisherId;
+    }
 
     public function getType()
     {
