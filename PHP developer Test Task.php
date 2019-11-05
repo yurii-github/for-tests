@@ -3,7 +3,8 @@
 
 The task:
  Our advertising platform promotes mobile applications , it contains a campaign for each such application
- our publishers bring users that install and then use these applications
+ our publishers bring users that install and then use these applications.
+
  the platform is reported about the install event and other application usage events of these users
  for example "app_open", "registration" and "purchase" events
  this stream of events is saved in a database

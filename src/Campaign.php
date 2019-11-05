@@ -1,4 +1,7 @@
 <?php
+
+namespace dio;
+
 class Campaign
 {
     /** @var  OptimizationProps $optProps */

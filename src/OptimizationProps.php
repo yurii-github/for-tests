@@ -1,4 +1,6 @@
 <?php
+namespace dio;
+
 class OptimizationProps
 {
     public $threshold;

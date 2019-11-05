@@ -1,4 +1,6 @@
 <?php
+namespace dio;
+
 class OptimizationJob
 {
     public function run()
