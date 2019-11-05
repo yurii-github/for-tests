@@ -2,15 +2,21 @@
 
 namespace dio\Entities;
 
+use dio\Entities\Publisher\PublisherBlacklist;
+
 class Campaign
 {
-    /** @var  OptimizationProps $optProps */
+    /** @var OptimizationProps */
     private $optProps;
-
-    /** @var  int */
+    /** @var int */
     private $id;
-
+    /** @var array */
     private $publisherBlacklist = [];
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getOptimizationProps()
     {
@@ -21,6 +27,7 @@ class Campaign
     {
         return $this->publisherBlacklist;
     }
+
     public function saveBlacklist($blacklist)
     {
         // don't implement

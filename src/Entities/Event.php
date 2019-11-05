@@ -1,4 +1,5 @@
 <?php
+
 namespace dio\Entities;
 
 class Event
@@ -11,10 +12,11 @@ class Event
     private $type;
     private $campaignId;
     private $publisherId;
+    /** @var ?? */
+    private $ts;
 
     public function getType()
     {
-        // for example "install"
         return $this->type;
     }
 

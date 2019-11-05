@@ -13,7 +13,6 @@ class EventsDataSource
     {
         $dt = new \DateTime($time);
 
-
         return [];
     }
 }
