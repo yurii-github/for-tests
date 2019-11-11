@@ -18,4 +18,5 @@ When we click on one of the saved forms, we will get a dialog that will alow us 
 
 You can implement it with Laravel + Vue or Native Js and use any libraries
 
-Put the code on server of your choise and provide me a link to working env.
+Put the code on server of your choice and provide me a link to working env.
+
