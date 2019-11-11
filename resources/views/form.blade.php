@@ -1,55 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laravel</title>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
-</head>
+@extends('layout')
 
-<body>
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-6">
-            <a class="btn btn-lg btn-primary" href="DO STUFF" role="button">Add form</a>
-        </div>
-    </div>
+@section('content')
+    @parent
 
-
-
-    <div class="row mt-3">
-        <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Add Form</h4>
-            <form class="needs-validation" novalidate="">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" placeholder="Name" value="" required="">
-                        <div class="invalid-feedback">
-                            Valid name is required.
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="custom-file">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        <input type="file" class="form-control" id="inputGroupFile01">
-                        <div class="invalid-feedback">
-                            Valid last name is required.
-                        </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    @include('form_popup')
 
     <div class="row mt-3">
         <div class="col-12">
@@ -182,10 +136,5 @@
             </div>
         </div>
     </div>
-</div>
 
-
-<script src="{{asset('js/app.js')}}"></script>
-
-</body>
-</html>
+@endsection
