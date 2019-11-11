@@ -34,3 +34,8 @@ Put the code on server of your choice and provide me a link to working env.
 touch database/database.sqlite
 ./artisan migrate
 ```
+
+## Full repo
+```
+ composer install --prefer-dist --no-dev
+```
