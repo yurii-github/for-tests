@@ -27,3 +27,10 @@ Put the code on server of your choice and provide me a link to working env.
 ```
 ./artisan serve
 ```
+
+## Dev
+
+```
+touch database/database.sqlite
+./artisan migrate
+```
