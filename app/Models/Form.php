@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -16,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Form extends Model
 {
+    use HasTimestamps;
+    use SoftDeletes;
+
     protected $table = 'form';
     protected $fillable = ['name'];
     protected $casts = [

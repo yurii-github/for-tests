@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -19,12 +21,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class File extends Model
 {
+    use HasTimestamps;
+    use SoftDeletes;
+
     protected $table = 'file';
     protected $fillable = ['data', 'filename', 'mime', 'size', 'target_id', 'target_type',];
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
+    ];
+    protected $hidden = [
+      'data'
     ];
 
     /**
