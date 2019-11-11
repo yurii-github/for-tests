@@ -20,3 +20,10 @@ You can implement it with Laravel + Vue or Native Js and use any libraries
 
 Put the code on server of your choice and provide me a link to working env.
 
+-----------------
+
+## To Test
+
+```
+./artisan serve
+```
