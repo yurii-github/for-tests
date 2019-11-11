@@ -5,8 +5,11 @@ use \Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('form');
-})->name('form.index');
+})->name('homepage');
 
+Route::get('/form', function () {
+    return \App\Models\Form::all();
+})->name('form.index');
 
 Route::post('/', function (Request $request) {
     $data = \Illuminate\Support\Facades\Validator::make($request->all(), [

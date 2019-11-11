@@ -1,141 +1,60 @@
 <template>
-    <div class="row mt-3">
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                        <td>elit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                        <td>ante</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                        <td>nisi</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                        <td>at</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                        <td>Duis</td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>Praesent</td>
-                        <td>mauris</td>
-                    </tr>
-                    <tr>
-                        <td>1,008</td>
-                        <td>Fusce</td>
-                        <td>nec</td>
-                        <td>tellus</td>
-                        <td>sed</td>
-                    </tr>
-                    <tr>
-                        <td>1,009</td>
-                        <td>augue</td>
-                        <td>semper</td>
-                        <td>porta</td>
-                        <td>Mauris</td>
-                    </tr>
-                    <tr>
-                        <td>1,010</td>
-                        <td>massa</td>
-                        <td>Vestibulum</td>
-                        <td>lacinia</td>
-                        <td>arcu</td>
-                    </tr>
-                    <tr>
-                        <td>1,011</td>
-                        <td>eget</td>
-                        <td>nulla</td>
-                        <td>Class</td>
-                        <td>aptent</td>
-                    </tr>
-                    <tr>
-                        <td>1,012</td>
-                        <td>taciti</td>
-                        <td>sociosqu</td>
-                        <td>ad</td>
-                        <td>litora</td>
-                    </tr>
-                    <tr>
-                        <td>1,013</td>
-                        <td>torquent</td>
-                        <td>per</td>
-                        <td>conubia</td>
-                        <td>nostra</td>
-                    </tr>
-                    <tr>
-                        <td>1,014</td>
-                        <td>per</td>
-                        <td>inceptos</td>
-                        <td>himenaeos</td>
-                        <td>Curabitur</td>
-                    </tr>
-                    <tr>
-                        <td>1,015</td>
-                        <td>sodales</td>
-                        <td>ligula</td>
-                        <td>in</td>
-                        <td>libero</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table ref="form-table" class="table table-striped table-sm">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Deleted</th>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
+  export default {
+    props: {
+      'listUrl': {
+        required: true,
+        type: String
+      }
+    },
+
+    beforeMount() {
+      console.log('beforeMount')
+      let _this = this
+
+      window.axios.get(this.listUrl).then((resp) => {
+        console.log('form list')
+        let $tbl = this.$refs['form-table']
+        let tbody = $('tbody', $(this.$refs['form-table']))
+
+
+        if (resp.data) {
+          resp.data.forEach(function(item, id) {
+            tbody.append($('<tr>')
+              .append($('<td>').text(item.id))
+              .append($('<td>').text(item.name))
+              .append($('<td>').text(item.created_at))
+              .append($('<td>').text(item.updated_at))
+              .append($('<td>').text(item.deleted_at))
+            )
+          })
         }
+      })
+    },
+
+    mounted() {
+      console.log('mounted')
     }
+
+  }
 </script>
