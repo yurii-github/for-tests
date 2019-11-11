@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,23 +13,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $size
  * @property int $target_id
  * @property string $target_type
- * @property string $created_at
- * @property string $updated_at
- * @property string $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
 class File extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'file';
+    protected $fillable = ['data', 'filename', 'mime', 'size', 'target_id', 'target_type',];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
 
     /**
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    protected $fillable = ['data', 'filename', 'mime', 'size', 'target_id', 'target_type', 'created_at', 'updated_at', 'deleted_at'];
-
-
+    public function target()
+    {
+        return $this->morphTo('target', 'target_type', 'target_id');
+    }
 }

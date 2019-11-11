@@ -2,27 +2,28 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
  * @property string $name
- * @property string $created_at
- * @property string $updated_at
- * @property string $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  */
 class Form extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'form';
+    protected $fillable = ['name'];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'created_at', 'updated_at', 'deleted_at'];
-
+    public function items()
+    {
+        return $this->hasMany(FormItem::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
  * @property int $id
@@ -11,17 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FormItem extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'form_item';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['form_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -29,5 +20,13 @@ class FormItem extends Model
     public function form()
     {
         return $this->belongsTo(Form::class);
+    }
+
+    /**
+     * @return MorphOne
+     */
+    public function file()
+    {
+        return $this->morphOne(File::class, 'target', 'target_type', 'target_id');
     }
 }
