@@ -44,113 +44,116 @@
     </div>
 </div>
 
-<script>
-
-  let form = $('#formAddModal form')
-  let formClone = $('.form-instance', form).first().clone()
-  let originalModal = $('#myModal').clone();
-
-  //
-  //
-  //
-  $(document).on('#formAddModal', 'shown.bs.modal', function () {
-    console.log('OPEN')
-  })
 
 
-  //
-  //
-  //
-  // $(document).on('#formAddModal', 'hidden.bs.modal', function () {
-  //   console.log('HIDE')
-  //   $('#formAddModal').remove();
-  //   let myClone = originalModal.clone();
-  //   $('body').append(myClone);
-  // });
+@section('script')
+    <script>
+      let form = $('#formAddModal form')
+      let formClone = $('.form-instance', form).first().clone()
+      let originalModal = $('#myModal').clone();
 
-
-  //
-  //
-  //
-  function addNewFormLine() {
-    let newForm = formClone.clone()
-    let newFileId = 'file_' + Date.now()
-    $('input[name="file"]', newForm).attr('id', newFileId)
-    $('input[name="file"]', newForm).siblings('label').attr('for', newFileId)
-    $('.form-instance', form).last().after(newForm)
-  }
-
-
-  //
-  //
-  //
-  $(form).delegate('input[name="file"]', 'change', function (e) {
-    console.log('FILE CHANGE', this.files)
-    let filesCount = this.files.length
-    $(this).siblings('label').text(filesCount + ' files selected')
-    addNewFormLine()
-  })
-
-
-  //
-  //
-  //
-  form.on('submit', function (e) {
-    console.log('SUBMIT')
-    e.preventDefault()
-
-    let progress = $('.progress-bar', form)
-    let formCount = $('.form-instance', this).length
-    let step = Math.round(100 / formCount)
-    let currentStep = 0
-
-    let save = async function (formInstanceEl) {
-      console.log('SAVING')
-      let _formInstance = $(formInstanceEl)
-      let formName = $('input[name="name"]', _formInstance).val()
-      let files = $('input[name="file"]', _formInstance).first()[0].files
-
-      let formData = new FormData()
-      formData.append('name', formName)
-      Array.prototype.forEach.call(files, function (file) {
-        formData.append("file[]", file)
+      //
+      //
+      //
+      $(document).on('#formAddModal', 'shown.bs.modal', function () {
+        console.log('OPEN')
       })
-      await fetch('/', {
-        method: "POST",
-        body: formData,
-        cache: 'no-cache',
-        headers: {
-          'Accept': 'application/json'
-        },
+
+
+      //
+      //
+      //
+      // $(document).on('#formAddModal', 'hidden.bs.modal', function () {
+      //   console.log('HIDE')
+      //   $('#formAddModal').remove();
+      //   let myClone = originalModal.clone();
+      //   $('body').append(myClone);
+      // });
+
+
+      //
+      //
+      //
+      function addNewFormLine() {
+        let newForm = formClone.clone()
+        let newFileId = 'file_' + Date.now()
+        $('input[name="file"]', newForm).attr('id', newFileId)
+        $('input[name="file"]', newForm).siblings('label').attr('for', newFileId)
+        $('.form-instance', form).last().after(newForm)
+      }
+
+
+      //
+      //
+      //
+      $(form).delegate('input[name="file"]', 'change', function (e) {
+        console.log('FILE CHANGE', this.files)
+        let filesCount = this.files.length
+        $(this).siblings('label').text(filesCount + ' files selected')
+        addNewFormLine()
       })
-        .then(function (resp) {
-          if(resp.status !== 200) {
-            _formInstance.addClass('bg-danger')
-            console.log('SAVE FAILED')
-            console.log(err)
-            return
-          }
-          _formInstance.removeClass('bg-danger').addClass('bg-success')
-          console.log('SAVED')
-          currentStep += step
-          if (currentStep > 100) {
-            currentStep = 100
-          }
-          progress.css('width', currentStep + '%')
-          if (currentStep === 100) {
-            $('#formAddModal').modal('hide')
-            // fetch list
-          }
-        }).catch(function (err) {
-          _formInstance.addClass('bg-danger')
-          console.log('SAVE FAILED')
-          console.log(err)
+
+
+      //
+      //
+      //
+      form.on('submit', function (e) {
+        console.log('SUBMIT')
+        e.preventDefault()
+
+        let progress = $('.progress-bar', form)
+        let formCount = $('.form-instance', this).length
+        let step = Math.round(100 / formCount)
+        let currentStep = 0
+
+        let save = async function (formInstanceEl) {
+          console.log('SAVING')
+          let _formInstance = $(formInstanceEl)
+          let formName = $('input[name="name"]', _formInstance).val()
+          let files = $('input[name="file"]', _formInstance).first()[0].files
+
+          let formData = new FormData()
+          formData.append('name', formName)
+          Array.prototype.forEach.call(files, function (file) {
+            formData.append("file[]", file)
+          })
+          await fetch('/', {
+            method: "POST",
+            body: formData,
+            cache: 'no-cache',
+            headers: {
+              'Accept': 'application/json'
+            },
+          })
+            .then(function (resp) {
+              if(resp.status !== 200) {
+                _formInstance.addClass('bg-danger')
+                console.log('SAVE FAILED')
+                console.log(err)
+                return
+              }
+              _formInstance.removeClass('bg-danger').addClass('bg-success')
+              console.log('SAVED')
+              currentStep += step
+              if (currentStep > 100) {
+                currentStep = 100
+              }
+              progress.css('width', currentStep + '%')
+              if (currentStep === 100) {
+                $('#formAddModal').modal('hide')
+                // fetch list
+              }
+            }).catch(function (err) {
+              _formInstance.addClass('bg-danger')
+              console.log('SAVE FAILED')
+              console.log(err)
+            })
+        }
+
+        $('.form-instance', this).each(function (idx, formEl) {
+          save(formEl)
         })
-    }
+      })
 
-    $('.form-instance', this).each(function (idx, formEl) {
-      save(formEl)
-    })
-  })
-
-</script>
+    </script>
+@endsection
