@@ -30,7 +30,7 @@
                         <div class="col-12">
                             <div class="progress" style="height: 8px;">
                                 <div class="progress-bar progress-bar-striped bg-success progress-bar-animated"
-                                     role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0"
+                                     role="progressbar" style="width: 0;" aria-valuenow="25" aria-valuemin="0"
                                      aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
       //
       //
       //
-      form.on('submit', function (e) {
+      $(document).delegate('#formAddModal form', 'submit', function (e) {
         console.log('SUBMIT')
         e.preventDefault()
 
