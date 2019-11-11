@@ -1,6 +1,6 @@
 <div class="row mt-3">
     <div class="col-12">
-        <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#formAddModal">Add form</a>
+        <a id="openForm" class="btn btn-primary btn-block">Add form</a>
     </div>
 </div>
 
@@ -50,12 +50,17 @@
     <script>
       let form = $('#formAddModal form')
       let formClone = $('.form-instance', form).first().clone()
-      let originalModal = $('#myModal').clone();
+      let originalModal = $('#formAddModal').clone();
+
+      $(document).delegate('#openForm', 'click', function(e) {
+        $('#formAddModal').modal('show')
+      })
+
 
       //
       //
       //
-      $(document).on('#formAddModal', 'shown.bs.modal', function () {
+      $(document).delegate('#formAddModal', 'shown.bs.modal', function () {
         console.log('OPEN')
       })
 
@@ -63,12 +68,12 @@
       //
       //
       //
-      // $(document).on('#formAddModal', 'hidden.bs.modal', function () {
-      //   console.log('HIDE')
-      //   $('#formAddModal').remove();
-      //   let myClone = originalModal.clone();
-      //   $('body').append(myClone);
-      // });
+      $(document).delegate('#formAddModal', 'hidden.bs.modal', function () {
+        console.log('HIDE')
+        $('#formAddModal').remove();
+        let myClone = originalModal.clone();
+        $('body').append(myClone);
+      });
 
 
       //
