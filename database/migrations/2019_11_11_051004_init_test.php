@@ -7,6 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class InitTest extends Migration
 {
     const T_FORM = 'form';
+    const T_FORM_ITEM = 'form_item';
     const T_FILE = 'file';
 
     /**
@@ -21,6 +22,15 @@ class InitTest extends Migration
             $table->string('name')->index();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::create(self::T_FORM_ITEM, function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('form_id');
+
+            $table->foreign('form_id')->on(self::T_FORM)->references('id')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
 
         Schema::create(self::T_FILE, function (Blueprint $table) {
@@ -46,6 +56,7 @@ class InitTest extends Migration
     public function down()
     {
         Schema::dropIfExists(self::T_FILE);
+        Schema::dropIfExists(self::T_FORM_ITEM);
         Schema::dropIfExists(self::T_FORM);
     }
 }

@@ -30,4 +30,5 @@ class File extends Model
      */
     protected $fillable = ['data', 'filename', 'mime', 'size', 'target_id', 'target_type', 'created_at', 'updated_at', 'deleted_at'];
 
+
 }
