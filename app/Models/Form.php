@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
+ *
+ * @property-read File[] $files
  */
 class Form extends Model
 {
@@ -22,8 +24,11 @@ class Form extends Model
         'deleted_at' => 'datetime',
     ];
 
-    public function items()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function files()
     {
-        return $this->hasMany(FormItem::class);
+        return $this->morphMany(File::class, 'target', 'target_type', 'target_id');
     }
 }
