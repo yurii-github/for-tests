@@ -18,7 +18,7 @@ class InitTest extends Migration
     {
         Schema::create(self::T_FORM, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->index();
+            $table->string('name')->index()->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });
