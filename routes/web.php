@@ -29,7 +29,7 @@ Route::get('/form/{form}', function (Request $request, \App\Models\Form $form) {
 })->name('form.view');
 
 
-Route::post('/', function (Request $request) {
+Route::post('/form', function (Request $request) {
     $data = \Illuminate\Support\Facades\Validator::make($request->all(), [
         'name' => ['sometimes', 'nullable', 'string'],
         'file' => ['sometimes', 'array'],
@@ -58,5 +58,8 @@ Route::post('/', function (Request $request) {
         }
         return $form;
     });
+
+    sleep(rand(1, 2));
+
     return $form;
 })->name('form.create');

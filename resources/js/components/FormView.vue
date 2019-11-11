@@ -21,7 +21,7 @@
               Files:<br>
               <ul>
                 <li v-for="file in this.form.files">
-                  <a :href="fileUrl(file.id)">{{ file.filename }} ({{ file.mime }})</a>
+                  <a :href="file.url">{{ file.filename }} ({{ file.mime }})</a>
                 </li>
               </ul>
             </div>
@@ -46,9 +46,6 @@
     },
     name: "FormView",
     methods: {
-      fileUrl(id) {
-        return '/file/' + id
-      },
       show(form) {
         let _this = this
         window.axios.get('/form/' + form.id)

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
+ * @property-read string $url
  */
 class File extends Model
 {
@@ -34,6 +35,15 @@ class File extends Model
     protected $hidden = [
       'data'
     ];
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute()
+    {
+        return route('file.get', ['file' => $this->id]);
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo

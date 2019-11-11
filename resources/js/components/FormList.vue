@@ -50,12 +50,10 @@
         let _this = this
         let $tbl = $(this.$refs['form-table'])
         let $tbody = $('tbody', $tbl)
-        console.log(this.$refs['form-table'], $tbl)
 
         window.axios.get(this.listUrl)
           .then((resp) => {
             $tbody.empty()
-            console.log('aaaaaaaa')
             resp.data.forEach(function (item, id) {
               let $btn = $('<button type="submit" data-id="' + item.id + '" class="btn btn-sm btn-primary btn-block">View</button>')
               $btn.on('click', function (e) {
