@@ -5,7 +5,7 @@
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="formAddModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Add Form</h4>
@@ -94,6 +94,11 @@
       })
 
 
+      $(document).on('x.form.added', function(e){
+        $('#formAddModal').modal('hide')
+      })
+
+
       //
       //
       //
@@ -126,12 +131,12 @@
             },
           })
             .then(function (resp) {
-              if(resp.status !== 200) {
+              if(resp.status !== 200 && resp.status !== 201) {
                 _formInstance.addClass('bg-danger')
                 console.log('SAVE FAILED')
                 console.log(err)
-                return
               }
+
               _formInstance.removeClass('bg-danger').addClass('bg-success')
               console.log('SAVED')
               currentStep += step
@@ -140,13 +145,11 @@
               }
               progress.css('width', currentStep + '%')
               if (currentStep === 100) {
-                $('#formAddModal').modal('hide')
-                // fetch list
+                $(document).trigger('x.form.added')
               }
             }).catch(function (err) {
               _formInstance.addClass('bg-danger')
-              console.log('SAVE FAILED')
-              console.log(err)
+              console.log('SAVE FAILED', err)
             })
         }
 
