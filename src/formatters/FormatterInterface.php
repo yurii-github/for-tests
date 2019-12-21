@@ -1,6 +1,6 @@
 <?php
 
-namespace formatters;
+namespace osahp\formatters;
 
 /**
  * Interface FormatterInterface

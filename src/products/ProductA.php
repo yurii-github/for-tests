@@ -1,5 +1,5 @@
 <?php
-namespace products;
+namespace osahp\products;
 
 /**
  * Class ProductA
