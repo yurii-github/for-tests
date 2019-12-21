@@ -45,11 +45,27 @@ final class XmlFormatter implements FormatterInterface
     }
 
 
+    protected function stripXml($xml)
+    {
+        $doc = new \DOMDocument();
+        $doc->loadXML($xml);
+        $list = $doc->getElementsByTagName('data');
+
+        $data = [];
+        foreach ($list as $item) {
+            $data[] = $doc->saveXML($item);
+        }
+
+        return implode('', $data);
+    }
+
+
     /**
      * {@inheritdoc}
      */
     public function format()
     {
-        return $this->arrayToXml($this->data);
+        $xml = $this->arrayToXml($this->data);
+        return $this->stripXml($xml);
     }
 }
