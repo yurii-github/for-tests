@@ -1,0 +1,16 @@
+{
+    "name": "osa_dc/php_test",
+    "description": "Test task for php position",
+    "authors": [
+        {
+            "name": "Alexey Bezruchenkov",
+            "email": "alexey.bezruchenkov@osahp.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "": "src/"
+        }
+    },
+    "require": {}
+}
