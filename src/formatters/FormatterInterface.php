@@ -5,8 +5,8 @@ namespace osahp\formatters;
 /**
  * Interface FormatterInterface
  */
-interface FormatterInterface {
-
+interface FormatterInterface
+{
     /**
      * @return string
      */

@@ -6,8 +6,21 @@ use \osahp\products;
 
 require_once 'vendor/autoload.php';
 
-$client = new Client(require 'config.php');
+$products = [
+    new products\ProductA(),
+    new products\ProductB(),
+    new products\ProductC(),
+    //new products\ProductUnknown(),
+];
 
-$client->format(new products\ProductA());
-$client->format(new products\ProductB());
-$client->format(new products\ProductC());
+echo "\n----------\nJSON:\n";
+$client = new Client(require 'config.php');
+foreach ($products as $product) {
+    echo $client->format($product) . "\n";
+}
+
+echo "\n----------\nXML:\n";
+$client = new Client(require 'config.php', 'xml');
+foreach ($products as $product) {
+    echo $client->format($product) . "\n";
+}

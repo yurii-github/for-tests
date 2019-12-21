@@ -12,5 +12,8 @@
           "osahp\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "ext-json": "*",
+        "ext-simplexml": "*"
+    }
 }

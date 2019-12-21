@@ -2,15 +2,21 @@
 
 namespace osahp\formatters;
 
-use osahp\exceptions\NotImplementedYet;
-
 final class JsonFormatter implements FormatterInterface
 {
+    protected $data;
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+
     /**
      * {@inheritdoc}
      */
     public function format()
     {
-        throw new NotImplementedYet();
+        return json_encode($this->data);
     }
 }

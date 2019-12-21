@@ -2,30 +2,70 @@
 
 namespace osahp;
 
+use osahp\exceptions\ProductUnknown;
 use osahp\formatters\FormatterInterface;
 
 class Client
 {
     private $config;
+    /** @var string */
+    private $formatterClass;
 
 
-    public function __construct(array $config = [])
+    /**
+     * Client constructor.
+     * @param array $config
+     * @param string|null $formatter xml|json
+     */
+    public function __construct(array $config = [], string $formatter = null)
     {
-        //TODO: add config checks
-        $this->config = array_merge([
-            'formatters' => [],
-            'defaults' => [
-                'formatter' => null,
-            ]
-        ], $config);
+        $this->config = array_merge([], $config);
+
+        $this->setFormatter($formatter);
     }
 
 
-    public function format(object $product, FormatterInterface $formatter = null)
+    public function setDefaultFormatter()
     {
-        echo get_class($product);
-        //TODO: add formatter
-        //$formatter->format();
+        $this->formatterClass = $this->config['formatters']['supported'][$this->config['formatters']['default']];
+    }
+
+
+    public function setFormatter(?string $formatter)
+    {
+        if (!isset($formatter)) {
+            $this->setDefaultFormatter();
+            return;
+        }
+
+        if (in_array($formatter, array_keys($this->config['formatters']['supported']))) {
+            $this->formatterClass = $this->config['formatters']['supported'][$formatter];
+        } else {
+            throw new \InvalidArgumentException();
+        }
+    }
+
+
+    /**
+     * @param object $product
+     * @return string
+     * @throws ProductUnknown
+     */
+    public function format(object $product)
+    {
+        $dataFunc = $this->config['formatters']['productDataFunc'][get_class($product)];
+
+        if (!$dataFunc) {
+            throw new ProductUnknown("Cannot find proper 'productDataFunc' in config mapping for " . get_class($product));
+        }
+
+        $formatter = new $this->formatterClass(['data' => call_user_func([$product, $dataFunc])]);
+
+        if (!$formatter instanceof FormatterInterface) {
+            throw new \InvalidArgumentException("MUST BE INSTANCE OF " . FormatterInterface::class);
+        }
+
+        return $formatter->format();
     }
 
 }
