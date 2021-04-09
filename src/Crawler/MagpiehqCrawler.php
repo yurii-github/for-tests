@@ -77,7 +77,7 @@ class MagpiehqCrawler implements CrawlerInterface
         ];
 
         $availability = strtolower($availability);
-        $pattern = '/availability:\s?(' . implode('|', array_keys($knownAvailabilities)) . ')/';
+        $pattern = '/^availability:\s?(' . implode('|', array_keys($knownAvailabilities)) . ')$/';
 
         if (preg_match($pattern, $availability, $m) !== 1) {
             throw new \InvalidArgumentException("Unknown availability format in '$availability'!", 1);
@@ -102,7 +102,7 @@ class MagpiehqCrawler implements CrawlerInterface
     {
         $knownTypes = ['MB', 'GB'];
 
-        if (preg_match('/(\d+)\s?('.implode('|',$knownTypes).')/', $capacity, $m) !== 1) {
+        if (preg_match('/^(\d+)\s?('.implode('|',$knownTypes).')$/', $capacity, $m) !== 1) {
             throw new \InvalidArgumentException("Unknown capacity format '$capacity'!", 1);
         }
 
@@ -128,7 +128,7 @@ class MagpiehqCrawler implements CrawlerInterface
     {
         $knownCurrencies = ['£'];
 
-        if (!preg_match('/('.implode('|',$knownCurrencies).')(.*)/', $price, $m)) {
+        if (!preg_match('/^('.implode('|',$knownCurrencies).')(.*)$/', $price, $m)) {
             throw new \InvalidArgumentException("Unknown price format in '$price'!", 1);
         }
 
