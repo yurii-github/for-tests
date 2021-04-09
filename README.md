@@ -8,7 +8,10 @@ start 15:00
 composer install
 wget -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
 chmod +x phpunit.phar
+
 ./phpunit.phar
+./phpunit.phar --testsuite unit
+
 ```
 
 
