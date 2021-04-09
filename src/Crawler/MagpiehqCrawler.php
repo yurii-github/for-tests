@@ -67,7 +67,7 @@ class MagpiehqCrawler implements CrawlerInterface
         return ProductCollection::make($products);
     }
 
-    protected static function resolveAvailability(string $availability)
+    protected static function resolveAvailability(string $availability): Availability
     {
         $knownAvailabilities = [
             'out of stock' => false,
@@ -191,6 +191,7 @@ class MagpiehqCrawler implements CrawlerInterface
     {
         $pageUrl = $this->buildPagedUrl($page);
         $html = (string)(new Client())->get($pageUrl)->getBody();
+        //file_put_contents(dirname(__DIR__,2)."/tests/data/magpiehq/page{$page}.html", $html);
         return new Crawler($html, $pageUrl);
     }
 

@@ -40,7 +40,7 @@
         "colour": "sky blue",
         "availabilityText": "In Stock Online",
         "isAvailable": true,
-        "shippingText": "Delivery by 2021-04-10",
+        "shippingText": "Delivery by 10 Apr 2021",
         "shippingDate": "2021-04-10"
     },
     {
@@ -73,7 +73,7 @@
         "colour": "orange",
         "availabilityText": "Out Of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Sunday 9th May 2021",
+        "shippingText": "Delivery from 9 May 2021",
         "shippingDate": "2021-05-09"
     },
     {
@@ -84,7 +84,7 @@
         "colour": "yellow",
         "availabilityText": "Out Of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Sunday 9th May 2021",
+        "shippingText": "Delivery from 9 May 2021",
         "shippingDate": "2021-05-09"
     },
     {
@@ -95,7 +95,7 @@
         "colour": "grey",
         "availabilityText": "Out Of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Sunday 9th May 2021",
+        "shippingText": "Delivery from 9 May 2021",
         "shippingDate": "2021-05-09"
     },
     {
@@ -106,7 +106,7 @@
         "colour": "blue",
         "availabilityText": "Out Of Stock",
         "isAvailable": false,
-        "shippingText": "Delivery from Sunday 9th May 2021",
+        "shippingText": "Delivery from 9 May 2021",
         "shippingDate": "2021-05-09"
     },
     {
@@ -117,7 +117,7 @@
         "colour": "black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers 2021-04-09",
+        "shippingText": "Delivers 09 Apr 2021",
         "shippingDate": "2021-04-09"
     },
     {
@@ -150,7 +150,7 @@
         "colour": "grey",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Free Delivery 10 Apr 2021",
+        "shippingText": "Free Delivery Saturday 10th Apr 2021",
         "shippingDate": "2021-04-10"
     },
     {
@@ -161,7 +161,7 @@
         "colour": "black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Free Delivery 10 Apr 2021",
+        "shippingText": "Free Delivery Saturday 10th Apr 2021",
         "shippingDate": "2021-04-10"
     },
     {
@@ -194,7 +194,7 @@
         "colour": "black",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers 2021-04-09",
+        "shippingText": "Delivers 09 Apr 2021",
         "shippingDate": "2021-04-09"
     },
     {
@@ -205,7 +205,7 @@
         "colour": "white",
         "availabilityText": "In Stock",
         "isAvailable": true,
-        "shippingText": "Delivers 2021-04-09",
+        "shippingText": "Delivers 09 Apr 2021",
         "shippingDate": "2021-04-09"
     },
     {
