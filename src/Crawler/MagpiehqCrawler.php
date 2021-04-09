@@ -1,6 +1,7 @@
 <?php
 namespace App\Crawler;
 
+use App\Entity\Price;
 use App\Entity\Product;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -41,6 +42,8 @@ class MagpiehqCrawler implements CrawlerInterface
             $capacity = $crawler->filter('div > h3 > span.product-capacity')->text();
             $product->setTitle($name . ' ' . $capacity);
             $product->setCapacity($capacity);
+            $product->setPrice(new Price($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
+            
             $colors = [];
             foreach ($crawler->filter('div > div:nth-child(3) > div > div > span') as $colorNode) {
                 /** @var \DOMElement $colorNode */

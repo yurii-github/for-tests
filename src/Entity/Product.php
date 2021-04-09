@@ -7,8 +7,7 @@ class Product
     protected string $title;
     protected string $color;
     protected int $capacity;
-    
-    public string $price;
+    protected Price $price;
     
     public string $availability;
 
@@ -28,6 +27,7 @@ class Product
     protected const SUPPORTED_COLORS = [
         'green', 'black', 'blue', 'sky blue', 'grey', 'orange', 'white', 'yellow', 'slate grey'
     ];
+    
     
     public function getTitle()
     {
@@ -52,7 +52,6 @@ class Product
     {
         return $this->color;
     }
-    
     
     public function getCapacity()
     {
@@ -83,5 +82,15 @@ class Product
         }
 
         $this->capacity = $capacity;
+    }
+    
+    public function getPrice()
+    {
+        return $this->price;
+    }
+    
+    public function setPrice(Price $price)
+    {
+        $this->price = $price;
     }
 }
