@@ -12,18 +12,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ScrapeCommand extends Command
 {
-    protected $crawlers = [
+    protected array $crawlers = [
         'magpiehq' => MagpiehqCrawler::class,
         'magpiehq-test' => MagpiehqTestDataCrawler::class
     ];
 
+    
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->checkAllRequiredOptionsAreNotEmpty($input);
 
         $crawler = $this->getCrawler($input->getOption('crawler'));
-
-        $output->setVerbosity(OutputInterface::VERBOSITY_NORMAL);
         $output->writeln("Fetching data..");
         $products = $crawler->getAllProducts();
         $output->writeln("Fetched {$products->count()} products.");
@@ -34,6 +33,7 @@ class ScrapeCommand extends Command
         $output->writeln("Dumping data into JSON file '$filename'..");
         file_put_contents($filename, json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
         $output->writeln("Data was dumped into JSON file successfully.");
+
         return Command::SUCCESS;
     }
 
@@ -42,11 +42,11 @@ class ScrapeCommand extends Command
     {
         $this
             ->setName('scrape')
-            ->addOption('crawler', null, InputOption::VALUE_REQUIRED, " 'magpiehq' or 'magpiehq-test'")
+            ->addOption('crawler', null, InputOption::VALUE_REQUIRED, "'magpiehq' or 'magpiehq-test'")
             ->setDescription('Scrapes test data from magpiehq.com');
     }
 
-    
+
     protected function getCrawler(string $name): CrawlerInterface
     {
         if (!array_key_exists($name, $this->crawlers)) {
@@ -56,7 +56,7 @@ class ScrapeCommand extends Command
         return new $this->crawlers[$name]();
     }
 
-    
+
     // https://github.com/symfony/symfony/issues/14716
     protected function checkAllRequiredOptionsAreNotEmpty(InputInterface $input)
     {

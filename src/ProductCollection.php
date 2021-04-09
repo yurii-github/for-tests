@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use App\Entity\Product;
@@ -11,9 +12,9 @@ class ProductCollection extends Collection
      */
     public function dedupedProducts()
     {
-        return $this->keyBy(function(Product $product) {
+        return $this->keyBy(function (Product $product) {
             // NOTE: not sure if I got filter logic correct, but here it is applied the way I understood
-            return strtolower($product->getTitle().'-'.$product->getCapacity()->getAmount().'-'.$product->getColor());
+            return strtolower($product->getTitle() . '-' . $product->getCapacity()->getAmount() . '-' . $product->getColor());
         })->values();
     }
 }

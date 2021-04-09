@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Crawler;
 
 use App\Entity\Availability;
@@ -22,50 +23,60 @@ class MagpiehqCrawler implements CrawlerInterface
     {
         $page = 0;
         $products = ProductCollection::empty();
-        assert($products instanceof ProductCollection);
-        
+
         do {
             $parsedProducts = $this->parseProductsFromPage($this->fetchPage(++$page));
             if ($parsedProducts->isEmpty()) {
                 break;
             }
             $products = $products->merge($parsedProducts);
-        } while($page < PHP_INT_MAX);
-        
+        } while ($page < PHP_INT_MAX);
+
         return $products;
     }
+
 
     protected function parseProductsFromPage(Crawler $page): ProductCollection
     {
         $products = [];
         $page->filter('#products > div.flex.flex-wrap.-mx-4 > div')->each(function (Crawler $crawler) use (&$products) {
-            $product = new Product();
-            $name = $crawler->filter('div > h3 > span.product-name')->text();
-            $capacity = $crawler->filter('div > h3 > span.product-capacity')->text();
-            $product->setTitle($name);
-            $product->setCapacity(self::resolveCapacity($capacity));
-            $product->setPrice(self::resolvePrice($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
-            $product->setImageUrl($crawler->filter('div > img')->image()->getUri());
-            $product->setAvailability(self::resolveAvailability($crawler->filter('div > div:nth-child(5)')->text()));
-            $deliveryNode = $crawler->filter('div > div:nth-child(6)');
-            $product->setDelivery($deliveryNode->count() ? self::resolveDelivery($deliveryNode->text()) : null);
-            $colors = [];
-            foreach ($crawler->filter('div > div:nth-child(3) > div > div > span') as $colorNode) {
-                /** @var \DOMElement $colorNode */
-                $colors[] = $colorNode->getAttribute('data-colour');
-            }
-            if ($colors) {
-                foreach ($colors as $color) {
-                    $product->setColor(strtolower($color));
-                    $products[] = clone $product;
+            try {
+                $productName = $crawler->filter('div > h3 > span.product-name')->text();
+                $productCapacity = self::resolveCapacity($crawler->filter('div > h3 > span.product-capacity')->text());
+                $productPrice = self::resolvePrice($crawler->filter('div > div.my-8.block.text-center.text-lg')->text());
+                $productImageUrl = $crawler->filter('div > img')->image()->getUri();
+                $productAvailability = self::resolveAvailability($crawler->filter('div > div:nth-child(5)')->text());
+                $deliveryNode = $crawler->filter('div > div:nth-child(6)');
+                $productDelivery = $deliveryNode->count() ? self::resolveDelivery($deliveryNode->text()) : null;
+                $colours = [];
+                foreach ($crawler->filter('div > div:nth-child(3) > div > div > span') as $colorNode) {
+                    /** @var \DOMElement $colorNode */
+                    $colours[] = strtolower($colorNode->getAttribute('data-colour'));
                 }
-            } else {
-                $products[] = $product;
+
+                if (!$colours) {
+                    throw new \Exception("We failed to fetch any colour for product!");
+                }
+
+                foreach ($colours as $colour) {
+                    $product = new Product();
+                    $product->setColor($colour);
+                    $product->setTitle($productName);
+                    $product->setCapacity(clone $productCapacity);
+                    $product->setPrice(clone $productPrice);
+                    $product->setImageUrl($productImageUrl);
+                    $product->setAvailability(clone $productAvailability);
+                    $product->setDelivery($productDelivery ? clone $productDelivery : $productDelivery);
+                    $products[] = $product;
+                }
+            } catch (\Throwable $t) {
+                throw new \Exception("ERROR! WEBPAGE: {$crawler->getUri()} | PRODUCT: $productName", 0, $t);
             }
         });
-        
+
         return ProductCollection::make($products);
     }
+
 
     protected static function resolveAvailability(string $availability): Availability
     {
@@ -88,21 +99,22 @@ class MagpiehqCrawler implements CrawlerInterface
         if (!array_key_exists($text, $knownAvailabilities)) {
             throw new \InvalidArgumentException("Unknown availability status in '$availability'!", 2);
         }
-        
+
         $isAvailable = $knownAvailabilities[$text];
 
-        if ($text === 'in stock at b90 4sb') { // edge case
+        if ($text === 'in stock at b90 4sb') { // edge case, is this postcode or something?
             $text = 'in stock at B90 4SB';
         }
-        
+
         return new Availability($text, $isAvailable);
     }
-    
+
+
     protected static function resolveCapacity(string $capacity): CapacityMegabyte
     {
         $knownTypes = ['MB', 'GB'];
 
-        if (preg_match('/^(\d+)\s?('.implode('|',$knownTypes).')$/', $capacity, $m) !== 1) {
+        if (preg_match('/^(\d+)\s?(' . implode('|', $knownTypes) . ')$/', $capacity, $m) !== 1) {
             throw new \InvalidArgumentException("Unknown capacity format '$capacity'!", 1);
         }
 
@@ -123,12 +135,13 @@ class MagpiehqCrawler implements CrawlerInterface
 
         return new CapacityMegabyte((int)$capacity);
     }
-    
-    protected static function resolvePrice(string $price): Price 
+
+
+    protected static function resolvePrice(string $price): Price
     {
         $knownCurrencies = ['£'];
 
-        if (!preg_match('/^('.implode('|',$knownCurrencies).')(.*)$/', $price, $m)) {
+        if (!preg_match('/^(' . implode('|', $knownCurrencies) . ')(.*)$/', $price, $m)) {
             throw new \InvalidArgumentException("Unknown price format in '$price'!", 1);
         }
 
@@ -142,9 +155,10 @@ class MagpiehqCrawler implements CrawlerInterface
         if (!in_array($currency, $knownCurrencies)) {
             throw new \InvalidArgumentException("Unknown price currency in '$price'!", 2);
         }
-        
+
         return new Price($amount, $currency);
     }
+
 
     protected static function resolveDelivery(string $delivery): ?Delivery
     {
@@ -185,7 +199,7 @@ class MagpiehqCrawler implements CrawlerInterface
 
         return new Delivery($text, $date);
     }
-    
+
 
     protected function fetchPage(int $page): Crawler
     {
@@ -195,9 +209,10 @@ class MagpiehqCrawler implements CrawlerInterface
         return new Crawler($html, $pageUrl);
     }
 
+
     protected function buildPagedUrl(int $page): string
     {
-        return self::BASEURL."?page={$page}";
+        return self::BASEURL . "?page={$page}";
     }
 
 }

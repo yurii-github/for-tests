@@ -9,7 +9,8 @@
     "symfony/console": "^5.2",
     "nesbot/carbon": "^2.46",
     "ext-json": "*",
-    "illuminate/collections": "^8.36"
+    "illuminate/collections": "^8.36",
+    "ext-dom": "*"
   },
   "autoload": {
     "psr-4": {

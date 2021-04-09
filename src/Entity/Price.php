@@ -14,10 +14,12 @@ class Price
         $this->currency = $currency;
     }
 
+
     public function getAmount(): float
     {
         return $this->amount;
     }
+
 
     public function getCurrency(): string
     {

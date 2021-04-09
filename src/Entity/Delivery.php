@@ -8,7 +8,7 @@ class Delivery
 {
     protected string $text;
     protected ?Carbon $date;
-    
+
 
     public function __construct(string $text, ?Carbon $date)
     {
@@ -16,10 +16,12 @@ class Delivery
         $this->date = $date;
     }
 
+
     public function getText(): string
     {
         return $this->text;
     }
+
 
     public function getDate(): ?Carbon
     {

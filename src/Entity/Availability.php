@@ -14,10 +14,12 @@ class Availability
         $this->isAvailable = $isAvailable;
     }
 
+
     public function isAvailable(): bool
     {
         return $this->isAvailable;
     }
+
 
     public function getText(): string
     {

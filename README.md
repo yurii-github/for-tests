@@ -5,9 +5,8 @@ composer install
 wget -O phpunit.phar https://phar.phpunit.de/phpunit-9.phar
 chmod +x phpunit.phar
 
+# to run tests
 ./phpunit.phar
-./phpunit.phar --testsuite unit
-
 
 # to scrape from test data
 ./scrape scrape --crawler=magpiehq-test
