@@ -1,8 +1,4 @@
-
 ## USAGE
-
-start 15:00
-
 
 ```
 composer install
@@ -12,6 +8,15 @@ chmod +x phpunit.phar
 ./phpunit.phar
 ./phpunit.phar --testsuite unit
 
+
+# to scrape from test data
+./scrape scrape --crawler=magpiehq-test
+
+# to scrape from real website
+./scrape scrape --crawler=magpiehq
+
+
+less output.json
 ```
 
 

@@ -31,8 +31,8 @@ class MagpiehqCrawlerTest extends TestCase
     public function providesCrawlers()
     {
         return [
-            [new MagpiehqTestDataCrawler()],
-           // [new MagpiehqCrawler()]
+            [new MagpiehqTestDataCrawler()], // uses static test data that we have fetched from real website
+            //[new MagpiehqCrawler()] // makes requests to real website changes, so it will probably fail someday
         ];
     }
 }
