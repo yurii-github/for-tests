@@ -2,17 +2,19 @@
 
 namespace App\Commands;
 
-use App\ScrapeHelper;
+use App\Crawler\MagpiehqCrawler;
+use GuzzleHttp\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DomCrawler\Crawler;
 
 require 'vendor/autoload.php';
 
 class ScrapeCommand extends Command
 {
     private array $products = [];
-    
+
     protected function configure(): void
     {
         $this
@@ -22,9 +24,13 @@ class ScrapeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $document = ScrapeHelper::fetchDocument('https://www.magpiehq.com/developer-challenge/smartphones');
-        file_put_contents('output.json', json_encode($this->products));
+        $crawler = new MagpiehqCrawler();
+        $products = $crawler->getAllProducts();
         
+        // TODO: logic
+        
+      //  file_put_contents('output.json', json_encode($this->products));
+
         return Command::SUCCESS;
     }
 }
