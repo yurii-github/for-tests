@@ -6,6 +6,7 @@ use App\Entity\Availability;
 use App\Entity\Delivery;
 use App\Entity\Price;
 use App\Entity\Product;
+use App\ProductCollection;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -17,23 +18,24 @@ class MagpiehqCrawler implements CrawlerInterface
     /**
      * @inheritDoc
      */
-    public function getAllProducts(): array
+    public function getAllProducts(): ProductCollection
     {
         $page = 0;
-        $products = [];
+        $products = ProductCollection::empty();
+        assert($products instanceof ProductCollection);
         
         do {
             $parsedProducts = $this->parseProductsFromPage($this->fetchPage(++$page));
-            if (empty($parsedProducts)) {
+            if ($parsedProducts->isEmpty()) {
                 break;
             }
-            $products = array_merge($products, $parsedProducts);
+            $products = $products->merge($parsedProducts);
         } while($page < PHP_INT_MAX);
         
         return $products;
     }
 
-    protected function parseProductsFromPage(Crawler $page): array
+    protected function parseProductsFromPage(Crawler $page): ProductCollection
     {
         $products = [];
         $page->filter('#products > div.flex.flex-wrap.-mx-4 > div')->each(function (Crawler $crawler) use (&$products) {
@@ -62,7 +64,7 @@ class MagpiehqCrawler implements CrawlerInterface
             }
         });
         
-        return $products;
+        return ProductCollection::make($products);
     }
 
 

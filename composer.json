@@ -8,7 +8,8 @@
     "symfony/css-selector": "^5.2",
     "symfony/console": "^5.2",
     "nesbot/carbon": "^2.46",
-    "ext-json": "*"
+    "ext-json": "*",
+    "illuminate/collections": "^8.36"
   },
   "autoload": {
     "psr-4": {

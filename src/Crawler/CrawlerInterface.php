@@ -2,12 +2,9 @@
 
 namespace App\Crawler;
 
-use App\Entity\Product;
+use App\ProductCollection;
 
 interface CrawlerInterface
 {
-    /**
-     * @return Product[]
-     */
-    public function getAllProducts(): array;
+    public function getAllProducts(): ProductCollection;
 }
