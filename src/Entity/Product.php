@@ -2,34 +2,18 @@
 
 namespace App\Entity;
 
-class Product
+class Product implements \JsonSerializable
 {
+    protected const SUPPORTED_COLORS = [
+        'green', 'black', 'blue', 'sky blue', 'grey', 'orange', 'white', 'yellow', 'slate grey'
+    ];
+    
     protected string $title;
     protected string $color;
     protected int $capacity;
     protected Price $price;
     protected string $imageUrl;
 
-    
-    public string $availability;
-
-//{
-//"title": "iPhone 11 Pro 64GB",
-//"price": 123.45,
-//"imageUrl": "https://example.com/image.png",
-//"capacityMB": 64000,
-//"colour": "red",
-//"availabilityText": "In Stock",
-//"isAvailable": true,
-//"shippingText": "Delivered from 25th March",
-//"shippingDate": "2021-03-25"
-//}
-
-
-    protected const SUPPORTED_COLORS = [
-        'green', 'black', 'blue', 'sky blue', 'grey', 'orange', 'white', 'yellow', 'slate grey'
-    ];
-    
     
     public function getTitle()
     {
@@ -107,5 +91,30 @@ class Product
             throw new \InvalidArgumentException("Invalid image Url in '$imageUrl'!");
         }
         $this->imageUrl = $imageUrl;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'title' => $this->getTitle(),
+            'price' => $this->getPrice()->getAmount(),
+            'imageUrl' => $this->getImageUrl(),
+            'capacityMB' => $this->getCapacity(),
+            'colour' => $this->getColor(),
+//            'availabilityText',
+//            'isAvailable',
+//            'shippingText',
+//            'shippingDate'
+        
+            //{
+//"availabilityText": "In Stock",
+//"isAvailable": true,
+//"shippingText": "Delivered from 25th March",
+//"shippingDate": "2021-03-25"
+//}
+        ];
     }
 }

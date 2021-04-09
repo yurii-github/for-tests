@@ -31,7 +31,7 @@ class Price
         $this->currency = $currency;
     }
 
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->amount;
     }
