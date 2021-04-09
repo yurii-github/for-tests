@@ -60,7 +60,7 @@ class MagpiehqCrawler implements CrawlerInterface
 
                 foreach ($colours as $colour) {
                     $product = new Product();
-                    $product->setColor($colour);
+                    $product->setColour($colour);
                     $product->setTitle($productName);
                     $product->setCapacity(clone $productCapacity);
                     $product->setPrice(clone $productPrice);

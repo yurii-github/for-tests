@@ -9,7 +9,7 @@ class Product implements \JsonSerializable
     ];
 
     protected string $title;
-    protected string $color;
+    protected string $colour;
     protected CapacityMegabyte $capacity;
     protected Price $price;
     protected string $imageUrl;
@@ -29,18 +29,18 @@ class Product implements \JsonSerializable
     }
 
 
-    public function setColor(string $color)
+    public function setColour(string $colour)
     {
-        if (!in_array($color, static::SUPPORTED_COLORS)) {
-            throw new \InvalidArgumentException("Color '$color' is not supported!");
+        if (!in_array($colour, static::SUPPORTED_COLORS)) {
+            throw new \InvalidArgumentException("Colour '$colour' is not supported!");
         }
-        $this->color = $color;
+        $this->colour = $colour;
     }
 
 
-    public function getColor(): string
+    public function getColour(): string
     {
-        return $this->color;
+        return $this->colour;
     }
 
     public function getCapacity(): CapacityMegabyte
@@ -116,7 +116,7 @@ class Product implements \JsonSerializable
             'price' => $this->getPrice()->getAmount(),
             'imageUrl' => $this->getImageUrl(),
             'capacityMB' => $this->getCapacity()->getAmount(),
-            'colour' => $this->getColor(),
+            'colour' => $this->getColour(),
             'availabilityText' => $this->getAvailability()->getText(),
             'isAvailable' => $this->getAvailability()->isAvailable(),
             'shippingText' => $this->getDelivery() ? $this->getDelivery()->getText() : null,
