@@ -2,4 +2,3 @@
 .idea/
 /phpunit.phar
 /.phpunit.cache/
-output.json
