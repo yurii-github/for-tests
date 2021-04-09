@@ -1,8 +1,8 @@
 <?php
 namespace App\Crawler;
 
-use App\DeliveryResolver;
 use App\Entity\Availability;
+use App\Entity\CapacityMegabyte;
 use App\Entity\Delivery;
 use App\Entity\Price;
 use App\Entity\Product;
@@ -42,8 +42,8 @@ class MagpiehqCrawler implements CrawlerInterface
             $product = new Product();
             $name = $crawler->filter('div > h3 > span.product-name')->text();
             $capacity = $crawler->filter('div > h3 > span.product-capacity')->text();
-            $product->setTitle($name . ' ' . $capacity);
-            $product->setCapacity(self::resolveCapacityMB($capacity));
+            $product->setTitle($name);
+            $product->setCapacity(self::resolveCapacity($capacity));
             $product->setPrice(self::resolvePrice($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
             $product->setImageUrl($crawler->filter('div > img')->image()->getUri());
             $product->setAvailability(self::resolveAvailability($crawler->filter('div > div:nth-child(5)')->text()));
@@ -98,7 +98,7 @@ class MagpiehqCrawler implements CrawlerInterface
         return new Availability($text, $isAvailable);
     }
     
-    protected static function resolveCapacityMB(string $capacity): int
+    protected static function resolveCapacity(string $capacity): CapacityMegabyte
     {
         $knownTypes = ['MB', 'GB'];
 
@@ -121,7 +121,7 @@ class MagpiehqCrawler implements CrawlerInterface
             $capacity *= 1000;
         }
 
-        return (int)$capacity;
+        return new CapacityMegabyte((int)$capacity);
     }
     
     protected static function resolvePrice(string $price): Price 

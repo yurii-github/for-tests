@@ -1,6 +1,6 @@
 [
     {
-        "title": "iPhone 11 Pro 64 GB",
+        "title": "iPhone 11 Pro 64GB",
         "price": 799.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/iphone-11-pro.png",
         "capacityMB": 64000,
@@ -110,7 +110,7 @@
         "shippingDate": "2021-05-09"
     },
     {
-        "title": "Google Pixel 5 256 GB",
+        "title": "Google Pixel 5 256GB",
         "price": 749.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/pixel-5.png",
         "capacityMB": 256000,
@@ -121,7 +121,7 @@
         "shippingDate": "2021-04-09"
     },
     {
-        "title": "Sony Xperia 10 32 GB",
+        "title": "Sony Xperia 10 32GB",
         "price": 449.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/sony-xperia.png",
         "capacityMB": 32000,
@@ -165,7 +165,7 @@
         "shippingDate": "2021-04-10"
     },
     {
-        "title": "Oppo Reno4 Pro 5G 64 GB",
+        "title": "Oppo Reno4 Pro 5G 64GB",
         "price": 749.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/oppo-reno.png",
         "capacityMB": 64000,
@@ -184,10 +184,10 @@
         "availabilityText": "In Stock",
         "isAvailable": true,
         "shippingText": "Free Delivery tomorrow",
-        "shippingDate": "2021-04-10"
+        "shippingDate": "2021-04-11"
     },
     {
-        "title": "Google Pixel 4 64 GB",
+        "title": "Google Pixel 4 64GB",
         "price": 499.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/pixel-5.png",
         "capacityMB": 64000,
@@ -198,7 +198,7 @@
         "shippingDate": "2021-04-09"
     },
     {
-        "title": "Google Pixel 4 64 GB",
+        "title": "Google Pixel 4 64GB",
         "price": 499.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/pixel-5.png",
         "capacityMB": 64000,
@@ -209,7 +209,7 @@
         "shippingDate": "2021-04-09"
     },
     {
-        "title": "LG K42 128 GB",
+        "title": "LG K42 128GB",
         "price": 499.99,
         "imageUrl": "https:\/\/www.magpiehq.com\/images\/lg-k42.png",
         "capacityMB": 128000,

@@ -28,7 +28,7 @@ class ScrapeCommand extends Command
         $products = $crawler->getAllProducts();
         $output->writeln("Fetched {$products->count()} products.");
         $output->writeln("Filtering data..");
-        // TODO: products filter logic
+        $products = $products->dedupedProducts();
         $output->writeln("{$products->count()} products left after filter was applied.");
         $filename = dirname(__DIR__, 2) . '/output.json';
         $output->writeln("Dumping data into JSON file '$filename'..");

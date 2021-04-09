@@ -10,7 +10,7 @@ class Product implements \JsonSerializable
     
     protected string $title;
     protected string $color;
-    protected int $capacity;
+    protected CapacityMegabyte $capacity;
     protected Price $price;
     protected string $imageUrl;
     protected Availability $availability;
@@ -40,12 +40,12 @@ class Product implements \JsonSerializable
         return $this->color;
     }
     
-    public function getCapacity(): int
+    public function getCapacity(): CapacityMegabyte
     {
         return $this->capacity;
     }
     
-    public function setCapacity(int $capacity): void
+    public function setCapacity(CapacityMegabyte $capacity): void
     {
         $this->capacity = $capacity;
     }
@@ -99,10 +99,10 @@ class Product implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'title' => $this->getTitle(),
+            'title' => $this->getTitle() . ' ' . $this->getCapacity(),
             'price' => $this->getPrice()->getAmount(),
             'imageUrl' => $this->getImageUrl(),
-            'capacityMB' => $this->getCapacity(),
+            'capacityMB' => $this->getCapacity()->getAmount(),
             'colour' => $this->getColor(),
             'availabilityText' => $this->getAvailability()->getText(),
             'isAvailable' => $this->getAvailability()->isAvailable(),
