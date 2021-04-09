@@ -1,0 +1,7 @@
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+$app = new \Symfony\Component\Console\Application('Magpie Test', 'Yurii K.');
+$app->add(new \App\Commands\ScrapeCommand());
+$app->run();
