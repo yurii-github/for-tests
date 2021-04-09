@@ -1,3 +1,17 @@
+
+## USAGE
+
+```
+composer install
+wget -O phpunit https://phar.phpunit.de/phpunit-9.phar
+chmod +x phpunit
+./phpunit
+```
+
+
+
+----------------
+
 ## Magpie PHP Developer Challenge
 
 Your task is to gather data about the products listed on https://www.magpiehq.com/developer-challenge/smartphones
