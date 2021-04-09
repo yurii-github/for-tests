@@ -8,6 +8,8 @@ class Product
     protected string $color;
     protected int $capacity;
     protected Price $price;
+    protected string $imageUrl;
+
     
     public string $availability;
 
@@ -84,7 +86,7 @@ class Product
         $this->capacity = $capacity;
     }
     
-    public function getPrice()
+    public function getPrice(): Price
     {
         return $this->price;
     }
@@ -92,5 +94,18 @@ class Product
     public function setPrice(Price $price)
     {
         $this->price = $price;
+    }
+
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): void
+    {
+        if (!str_starts_with($imageUrl, 'http')) {
+            throw new \InvalidArgumentException("Invalid image Url in '$imageUrl'!");
+        }
+        $this->imageUrl = $imageUrl;
     }
 }

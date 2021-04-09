@@ -33,7 +33,7 @@ class MagpiehqCrawler implements CrawlerInterface
     {
         $products = [];
         
-        $crawler = new Crawler();
+        $crawler = new Crawler(null, $page->getUri(), $page->getBaseHref());
         foreach ($page->filter('#products > div.flex.flex-wrap.-mx-4 > div') as $productNode) {
             $crawler->clear();
             $crawler->addNode($productNode);
@@ -43,6 +43,7 @@ class MagpiehqCrawler implements CrawlerInterface
             $product->setTitle($name . ' ' . $capacity);
             $product->setCapacity($capacity);
             $product->setPrice(new Price($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
+            $product->setImageUrl($crawler->filter('div > img')->image()->getUri());
             
             $colors = [];
             foreach ($crawler->filter('div > div:nth-child(3) > div > div > span') as $colorNode) {
