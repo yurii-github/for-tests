@@ -1,5 +1,5 @@
 /vendor/
 .idea/
-/phpunit
+/phpunit.phar
 /.phpunit.cache/
 output.json
