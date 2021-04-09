@@ -20,10 +20,11 @@ class MagpiehqCrawlerTest extends TestCase
         $this->assertInstanceOf(ProductCollection::class, $products);
         $this->assertCount(21, $products);
 
-        $this->assertSame(file_get_contents(dirname(__DIR__) . '/data/magpiehq/all_products.json'),
-            json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
-        );
-
+        if ($crawler instanceof MagpiehqTestCrawler) {
+            $this->assertSame(file_get_contents(dirname(__DIR__) . '/data/magpiehq/all_products.json'),
+                json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+            );
+        }
     }
 
 
@@ -31,7 +32,7 @@ class MagpiehqCrawlerTest extends TestCase
     {
         return [
             [new MagpiehqTestCrawler()],
-         //   [new MagpiehqCrawler()]
+           // [new MagpiehqCrawler()]
         ];
     }
 }

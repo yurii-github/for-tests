@@ -43,10 +43,10 @@ class MagpiehqCrawler implements CrawlerInterface
             $name = $crawler->filter('div > h3 > span.product-name')->text();
             $capacity = $crawler->filter('div > h3 > span.product-capacity')->text();
             $product->setTitle($name . ' ' . $capacity);
-            $product->setCapacity($capacity);
-            $product->setPrice(new Price($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
+            $product->setCapacity(self::resolveCapacityMB($capacity));
+            $product->setPrice(self::resolvePrice($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
             $product->setImageUrl($crawler->filter('div > img')->image()->getUri());
-            $product->setAvailability(new Availability($crawler->filter('div > div:nth-child(5)')->text()));
+            $product->setAvailability(self::resolveAvailability($crawler->filter('div > div:nth-child(5)')->text()));
             $deliveryNode = $crawler->filter('div > div:nth-child(6)');
             $product->setDelivery($deliveryNode->count() ? self::resolveDelivery($deliveryNode->text()) : null);
             $colors = [];
@@ -56,7 +56,7 @@ class MagpiehqCrawler implements CrawlerInterface
             }
             if ($colors) {
                 foreach ($colors as $color) {
-                    $product->setColor($color);
+                    $product->setColor(strtolower($color));
                     $products[] = clone $product;
                 }
             } else {
@@ -67,6 +67,84 @@ class MagpiehqCrawler implements CrawlerInterface
         return ProductCollection::make($products);
     }
 
+    protected static function resolveAvailability(string $availability)
+    {
+        $knownAvailabilities = [
+            'out of stock' => false,
+            'in stock at b90 4sb' => true,
+            'in stock online' => true,
+            'in stock' => true,
+        ];
+
+        $availability = strtolower($availability);
+        $pattern = '/availability:\s?(' . implode('|', array_keys($knownAvailabilities)) . ')/';
+
+        if (preg_match($pattern, $availability, $m) !== 1) {
+            throw new \InvalidArgumentException("Unknown availability format in '$availability'!", 1);
+        }
+
+        $text = $m[1];
+
+        if (!array_key_exists($text, $knownAvailabilities)) {
+            throw new \InvalidArgumentException("Unknown availability status in '$availability'!", 2);
+        }
+        
+        $isAvailable = $knownAvailabilities[$text];
+
+        if ($text === 'in stock at b90 4sb') { // edge case
+            $text = 'in stock at B90 4SB';
+        }
+        
+        return new Availability($text, $isAvailable);
+    }
+    
+    protected static function resolveCapacityMB(string $capacity): int
+    {
+        $knownTypes = ['MB', 'GB'];
+
+        if (preg_match('/(\d+)\s?('.implode('|',$knownTypes).')/', $capacity, $m) !== 1) {
+            throw new \InvalidArgumentException("Unknown capacity format '$capacity'!", 1);
+        }
+
+        $capacity = $m[1];
+        $type = $m[2];
+
+        if (intval($capacity) != $capacity) {
+            throw new \InvalidArgumentException("Unknown capacity size!", 2);
+        }
+
+        if (!in_array($type, $knownTypes)) {
+            throw new \InvalidArgumentException("Unknown capacity type!", 3);
+        }
+
+        if ($type == 'GB') {
+            $capacity *= 1000;
+        }
+
+        return (int)$capacity;
+    }
+    
+    protected static function resolvePrice(string $price): Price 
+    {
+        $knownCurrencies = ['£'];
+
+        if (!preg_match('/('.implode('|',$knownCurrencies).')(.*)/', $price, $m)) {
+            throw new \InvalidArgumentException("Unknown price format in '$price'!", 1);
+        }
+
+        $currency = $m[1];
+        $amount = $m[2];
+
+        if (floatval($amount) != $amount) {
+            throw new \InvalidArgumentException("Unknown price amount in '$price'!", 2);
+        }
+
+        if (!in_array($currency, $knownCurrencies)) {
+            throw new \InvalidArgumentException("Unknown price currency in '$price'!", 2);
+        }
+        
+        return new Price($amount, $currency);
+    }
 
     protected static function resolveDelivery(string $delivery): ?Delivery
     {
@@ -112,14 +190,8 @@ class MagpiehqCrawler implements CrawlerInterface
     protected function fetchPage(int $page): Crawler
     {
         $pageUrl = $this->buildPagedUrl($page);
-        $html = $this->fetchDocument($pageUrl);
+        $html = (string)(new Client())->get($pageUrl)->getBody();
         return new Crawler($html, $pageUrl);
-    }
-    
-    protected function fetchDocument(string $url):string
-    {
-        $client = new Client();
-        return (string)$client->get($url)->getBody();
     }
 
     protected function buildPagedUrl(int $page): string
