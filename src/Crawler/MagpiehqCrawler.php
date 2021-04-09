@@ -36,11 +36,7 @@ class MagpiehqCrawler implements CrawlerInterface
     protected function parseProductsFromPage(Crawler $page): array
     {
         $products = [];
-        $crawler = new Crawler(null, $page->getUri(), $page->getBaseHref());
-
-        foreach ($page->filter('#products > div.flex.flex-wrap.-mx-4 > div') as $productNode) {
-            $crawler->clear();
-            $crawler->addNode($productNode);
+        $page->filter('#products > div.flex.flex-wrap.-mx-4 > div')->each(function (Crawler $crawler) use (&$products) {
             $product = new Product();
             $name = $crawler->filter('div > h3 > span.product-name')->text();
             $capacity = $crawler->filter('div > h3 > span.product-capacity')->text();
@@ -64,7 +60,7 @@ class MagpiehqCrawler implements CrawlerInterface
             } else {
                 $products[] = $product;
             }
-        }
+        });
         
         return $products;
     }
