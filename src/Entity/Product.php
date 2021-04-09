@@ -14,9 +14,10 @@ class Product implements \JsonSerializable
     protected Price $price;
     protected string $imageUrl;
     protected Availability $availability;
+    protected ?Delivery $delivery;
 
     
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -40,12 +41,12 @@ class Product implements \JsonSerializable
         return $this->color;
     }
     
-    public function getCapacity()
+    public function getCapacity(): int
     {
         return $this->capacity;
     }
     
-    public function setCapacity(string $capacity)
+    public function setCapacity(string $capacity): void
     {
         $knownTypes = ['MB', 'GB'];
         
@@ -104,6 +105,16 @@ class Product implements \JsonSerializable
         $this->availability = $availability;
     }
 
+    public function setDelivery(?Delivery $delivery): void
+    {
+        $this->delivery = $delivery;
+    }
+    
+    public function getDelivery(): ?Delivery
+    {
+        return $this->delivery;
+    }
+    
     /**
      * @inheritDoc
      */
@@ -117,16 +128,8 @@ class Product implements \JsonSerializable
             'colour' => $this->getColor(),
             'availabilityText' => $this->getAvailability()->getText(),
             'isAvailable' => $this->getAvailability()->isAvailable(),
-
-//            'shippingText',
-//            'shippingDate'
-        
-            //{
-//"availabilityText": "In Stock",
-//"isAvailable": true,
-//"shippingText": "Delivered from 25th March",
-//"shippingDate": "2021-03-25"
-//}
+            'shippingText' => $this->getDelivery() ? $this->getDelivery()->getText() : null,
+            'shippingDate' => $this->getDelivery() && ($date = $this->getDelivery()->getDate()) ? $date->toDateString() : null,
         ];
     }
 }
