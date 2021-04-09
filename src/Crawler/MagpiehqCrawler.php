@@ -1,6 +1,7 @@
 <?php
 namespace App\Crawler;
 
+use App\Entity\Availability;
 use App\Entity\Price;
 use App\Entity\Product;
 use GuzzleHttp\Client;
@@ -44,6 +45,7 @@ class MagpiehqCrawler implements CrawlerInterface
             $product->setCapacity($capacity);
             $product->setPrice(new Price($crawler->filter('div > div.my-8.block.text-center.text-lg')->text()));
             $product->setImageUrl($crawler->filter('div > img')->image()->getUri());
+            $product->setAvailability(new Availability($crawler->filter('div > div:nth-child(5)')->text()));
             
             $colors = [];
             foreach ($crawler->filter('div > div:nth-child(3) > div > div > span') as $colorNode) {

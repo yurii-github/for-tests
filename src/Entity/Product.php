@@ -13,6 +13,7 @@ class Product implements \JsonSerializable
     protected int $capacity;
     protected Price $price;
     protected string $imageUrl;
+    protected Availability $availability;
 
     
     public function getTitle()
@@ -93,6 +94,16 @@ class Product implements \JsonSerializable
         $this->imageUrl = $imageUrl;
     }
 
+    public function getAvailability(): Availability
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(Availability $availability): void
+    {
+        $this->availability = $availability;
+    }
+
     /**
      * @inheritDoc
      */
@@ -104,8 +115,9 @@ class Product implements \JsonSerializable
             'imageUrl' => $this->getImageUrl(),
             'capacityMB' => $this->getCapacity(),
             'colour' => $this->getColor(),
-//            'availabilityText',
-//            'isAvailable',
+            'availabilityText' => $this->getAvailability()->getText(),
+            'isAvailable' => $this->getAvailability()->isAvailable(),
+
 //            'shippingText',
 //            'shippingDate'
         
