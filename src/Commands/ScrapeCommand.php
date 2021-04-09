@@ -3,18 +3,12 @@
 namespace App\Commands;
 
 use App\Crawler\MagpiehqCrawler;
-use GuzzleHttp\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DomCrawler\Crawler;
-
-require 'vendor/autoload.php';
 
 class ScrapeCommand extends Command
 {
-    private array $products = [];
-
     protected function configure(): void
     {
         $this
@@ -27,9 +21,9 @@ class ScrapeCommand extends Command
         $crawler = new MagpiehqCrawler();
         $products = $crawler->getAllProducts();
         
-        // TODO: logic
+        // TODO: products filter logic
         
-      //  file_put_contents('output.json', json_encode($this->products));
+        file_put_contents('output.json', json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
         return Command::SUCCESS;
     }
