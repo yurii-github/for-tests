@@ -15,22 +15,27 @@ use Symfony\Component\DomCrawler\Crawler;
 class MagpiehqCrawler implements CrawlerInterface
 {
     const BASEURL = 'https://www.magpiehq.com/developer-challenge/smartphones';
+    const MAX_PAGES = 1000;
 
     /**
      * @inheritDoc
      */
     public function getAllProducts(): ProductCollection
     {
-        $page = 0;
+        $page = 1;
         $products = ProductCollection::empty();
 
         do {
-            $parsedProducts = $this->parseProductsFromPage($this->fetchPage(++$page));
+            if ($page > self::MAX_PAGES) {
+                throw new \LengthException("Too many pages. Last page was '$page'!");
+            }
+            $parsedProducts = $this->parseProductsFromPage($this->fetchPage($page));
             if ($parsedProducts->isEmpty()) {
                 break;
             }
             $products = $products->merge($parsedProducts);
-        } while ($page < PHP_INT_MAX);
+            $page++;
+        } while (true);
 
         return $products;
     }
@@ -115,18 +120,18 @@ class MagpiehqCrawler implements CrawlerInterface
         $knownTypes = ['MB', 'GB'];
 
         if (preg_match('/^(\d+)\s?(' . implode('|', $knownTypes) . ')$/', $capacity, $m) !== 1) {
-            throw new \InvalidArgumentException("Unknown capacity format '$capacity'!", 1);
+            throw new \InvalidArgumentException("Unknown capacity format in '$capacity'!", 1);
         }
 
         $capacity = $m[1];
         $type = $m[2];
 
         if (intval($capacity) != $capacity) {
-            throw new \InvalidArgumentException("Unknown capacity size!", 2);
+            throw new \InvalidArgumentException("Invalid capacity size in '$capacity'!", 2);
         }
 
         if (!in_array($type, $knownTypes)) {
-            throw new \InvalidArgumentException("Unknown capacity type!", 3);
+            throw new \InvalidArgumentException("Unknown capacity type in '$capacity'!", 3);
         }
 
         if ($type == 'GB') {

@@ -24,9 +24,9 @@ class CapacityMegabyte
      */
     public function __toString(): string
     {
-        return sprintf('%s%s',
-            $this->getAmount() > 1000 ? round($this->getAmount() / 1000) : $this->getAmount(),
-            $this->getAmount() > 1000 ? 'GB' : 'MB'
-        );
+        $amount = $this->getAmount() > 1000 ? round($this->getAmount() / 1000) : $this->getAmount();
+        $size = $this->getAmount() > 1000 ? 'GB' : 'MB';
+
+        return sprintf('%s%s', $amount, $size);
     }
 }

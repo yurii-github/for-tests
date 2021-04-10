@@ -11,6 +11,8 @@ use App\Crawler\MagpiehqTestDataCrawler;
 class MagpiehqCrawlerTest extends TestCase
 {
     /**
+     * This is very simplified test just to show that it works
+     * 
      * @dataProvider providesCrawlers
      * @param CrawlerInterface $crawler
      */
