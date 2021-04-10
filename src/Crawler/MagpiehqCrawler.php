@@ -162,42 +162,35 @@ class MagpiehqCrawler implements CrawlerInterface
 
     protected static function resolveDelivery(string $delivery): ?Delivery
     {
-        $text = null;
-        $date = null;
-
         if (preg_match('/^Unavailable for delivery$/', $delivery, $match)) { // Unavailable for delivery
-            $text = $match[0];
-        } elseif (preg_match('/^Delivery by (.*)$/', $delivery, $match)) { // Delivery by 2021-04-10
-            $text = $match[0];
-            $date = Carbon::parse($match[1]);
-        } elseif (preg_match('/^Available on (.*)$/', $delivery, $match)) { // Available on 16 Apr 2021
-            $text = $match[0];
-            $date = Carbon::parse($match[1]);
-        } elseif (preg_match('/^Free Shipping$/', $delivery, $match)) { // Free Shipping
-            $text = $match[0];
-        } elseif (preg_match('/^Delivery from (.*)$/', $delivery, $match)) {  // Delivery from Sunday 9th May 2021
-            $text = $match[0];
-            $date = Carbon::parse($match[1]);
-        } elseif (preg_match('/^Delivers (.*)$/', $delivery, $match)) { // Delivers 2021-04-09
-            $text = $match[0];
-            $date = Carbon::parse($match[1]);
-        } elseif (preg_match('/^Free Delivery (.*)$/', $delivery, $match)) { // Free Delivery 10 Apr 2021 | Free Delivery tomorrow
-            $text = $match[0];
-            $date = Carbon::parse($match[1]);
-        } elseif (preg_match('/^Free Delivery$/', $delivery, $match)) { // Free Delivery
-            $text = $match[0];
-        } elseif (preg_match('/^Order within \d+ hours and have it (.*)$/', $delivery, $match)) { // Order within 6 hours and have it 11 Apr 2021 
-            $text = $match[0];
-            $date = Carbon::parse($match[1]);
-        } else {
-            throw new \InvalidArgumentException("Unknown delivery text in '$delivery'!");
+            return new Delivery($match[0]);
+        }
+        if (preg_match('/^Delivery by (.*)$/', $delivery, $match)) { // Delivery by 2021-04-10
+            return new Delivery($match[0], Carbon::parse($match[1]));
+        }
+        if (preg_match('/^Available on (.*)$/', $delivery, $match)) { // Available on 16 Apr 2021
+            return new Delivery($match[0], Carbon::parse($match[1]));
+        }
+        if (preg_match('/^Free Shipping$/', $delivery, $match)) { // Free Shipping
+            return new Delivery($match[0]);
+        }
+        if (preg_match('/^Delivery from (.*)$/', $delivery, $match)) {  // Delivery from Sunday 9th May 2021
+            return new Delivery($match[0], Carbon::parse($match[1]));
+        }
+        if (preg_match('/^Delivers (.*)$/', $delivery, $match)) { // Delivers 2021-04-09
+            return new Delivery($match[0], Carbon::parse($match[1]));
+        }
+        if (preg_match('/^Free Delivery (.*)$/', $delivery, $match)) { // Free Delivery 10 Apr 2021 | Free Delivery tomorrow
+            return new Delivery($match[0], Carbon::parse($match[1]));
+        }
+        if (preg_match('/^Free Delivery$/', $delivery, $match)) { // Free Delivery
+            return new Delivery($match[0]);
+        }
+        if (preg_match('/^Order within \d+ hours and have it (.*)$/', $delivery, $match)) { // Order within 6 hours and have it 11 Apr 2021 
+            return new Delivery($match[0], Carbon::parse($match[1]));
         }
 
-        if ($text === null) {
-            return null;
-        }
-
-        return new Delivery($text, $date);
+        throw new \InvalidArgumentException("Unknown delivery text in '$delivery'!");
     }
 
 
@@ -205,7 +198,7 @@ class MagpiehqCrawler implements CrawlerInterface
     {
         $pageUrl = $this->buildPagedUrl($page);
         $html = (string)(new Client())->get($pageUrl)->getBody();
-        //file_put_contents(dirname(__DIR__,2)."/tests/data/magpiehq/page{$page}.html", $html);
+
         return new Crawler($html, $pageUrl);
     }
 

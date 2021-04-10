@@ -10,7 +10,7 @@ class Delivery
     protected ?Carbon $date;
 
 
-    public function __construct(string $text, ?Carbon $date)
+    public function __construct(string $text, ?Carbon $date = null)
     {
         $this->text = $text;
         $this->date = $date;

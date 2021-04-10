@@ -7,9 +7,9 @@ class CapacityMegabyte
     protected int $amount;
 
 
-    public function __construct(int $amount)
+    public function __construct(int $amountInMegabytes)
     {
-        $this->amount = $amount;
+        $this->amount = $amountInMegabytes;
     }
 
 
